@@ -1,9 +1,17 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MyPage from "./components/MyPage";
 
-function App() {
-  return <Router></Router>;
-}
+const App = () => {
+  return (
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route path="/mypage" element={<MyPage />} />
+        </Routes>
+      </Router>
+    </div>
+  );
+};
 
 export default App;
