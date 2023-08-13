@@ -130,7 +130,6 @@ const ColumnCreatePage = ()=>{
         </div>
       </div>
       <button className={styles.submitButton} onClick={handleSubmitButton}>발행하기</button>
-      <div dangerouslySetInnerHTML={{__html:content}}/>
     </div>
   )
 }
