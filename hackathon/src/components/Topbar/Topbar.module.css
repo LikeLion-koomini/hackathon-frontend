@@ -1,0 +1,70 @@
+.topbarContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100vw;
+  max-width: 90rem;
+  height: 4.5rem;
+
+  border-bottom: 0.1rem solid #E4E4E4;
+}
+
+.topbarTools{
+  display: flex;
+  height: 100%;
+}
+
+.logo{
+  width: 14rem;
+  margin-left: 2.75rem;
+  object-fit: contain;
+
+  cursor: pointer;
+}
+.tool, .currentTool{
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+  margin-left: 2.75rem;
+  text-align: center;
+  font-size: 0.9375rem;
+  font-style: normal;
+  line-height: normal;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+.tool{
+  color: #070707;
+  font-weight: 400;
+}
+.currentTool{
+  color: #005F99;
+  border-bottom: 0.1rem solid #005F99;
+  font-weight: 700;
+}
+
+.userStatusTool{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 9.144rem;
+  height: 2.4525rem;
+
+  border-radius: 0.4rem;
+  border: 0.1rem solid #002947;
+
+  flex-shrink: 0;
+  color: var(--5, #002947);
+  text-align: center;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+  
+  cursor: pointer;
+}
