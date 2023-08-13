@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./components/LoginPage/LoginPage";
 import MainPage from "./components/MainPage/MainPage";
+import SeriesList from "./components/SeriesPage/SeriesList";
+import SeriesCreate from "./components/SeriesPage/SeriesCreate";
 
 const App = () => {
   return (
@@ -10,6 +12,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/seriesList" element={<SeriesList />} />
+          <Route path="/seriesList/create" element={<SeriesCreate />} />
         </Routes>
       </Router>
     </div>
