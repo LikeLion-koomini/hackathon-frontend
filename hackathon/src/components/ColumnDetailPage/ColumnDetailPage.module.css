@@ -1,0 +1,38 @@
+ul,li,p {
+  text-align: left;
+  /* 좌측 정렬 */
+}
+
+.background{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+}
+
+.columnHeader{
+  position: relative;
+
+  width: 100%;
+  height: 15rem;
+
+  background-color: #E1F1FA;
+  margin-bottom: 3.5rem;
+}
+
+.columnTItle{
+  position: absolute;
+  top: 40%;
+  left: 0rem;
+
+  width: 100%;
+
+  color: var(--5, #002947);
+  text-align: center;
+  font-family: Ubuntu;
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+}
