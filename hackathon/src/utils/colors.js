@@ -1,4 +1,4 @@
-const colors = {
+const colors = { //색상은 바꿔야합니다
   $primaryPurple: "#6638E6",
   $gray: "#EEE",
   $white: "#FFF",
