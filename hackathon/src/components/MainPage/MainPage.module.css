@@ -1,0 +1,223 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main_container {
+  width: 90rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main_input input {
+  width: 43.75rem;
+  height: 3.125rem;
+  flex-shrink: 0;
+  border-radius: 0.9375rem;
+  border: 1px solid #000;
+  background: #FFF;
+  margin: 1.8rem 0;
+  padding-left: 0.8rem;
+}
+
+.main_img {
+  width: 90rem;
+  height: 28.125rem;
+  background: var(--0, #E1F1FA);
+}
+
+.main_section1 {
+  display: flex;
+  width: 64rem;
+  padding: 0.625rem;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.section1 {
+  display: flex;
+  width: 17rem;
+  height: 6.25rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main_section1_context {
+  width: 11rem;
+  height: 6.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.main_section1 h1 {
+  color: #000;
+  font-family: Ubuntu;
+  font-size: 1.0625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.main_section1 p {
+  color: #6D6D6D;
+  font-family: Ubuntu;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.25rem; /* 153.846% */
+  text-transform: uppercase;
+  margin-top: -1rem;
+}
+
+.main_title {
+  height: 18rem;
+}
+
+.main_title h1 {
+  color: #000;
+  text-align: center;
+  font-family: Ubuntu;
+  font-size: 2.625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.main_title p {
+  color: #000;
+  text-align: center;
+  font-family: Ubuntu;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem; /* 133.333% */
+  text-transform: uppercase;
+  padding-top: 2rem;
+}
+
+.main_section2 {
+  width: 90rem;
+  height: 22rem;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 8rem;
+}
+
+.main_section2 h1 {
+  color: #000;
+  text-align: center;
+  font-family: Ubuntu;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.main_section2 p {
+  width: 16.25rem;
+  height: 6.25rem;
+  color: #6D6D6D;
+  text-align: center;
+  font-family: Ubuntu;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2rem; /* 145.455% */
+  text-transform: uppercase;
+}
+
+.main_section2_box {
+  display: flex;
+  width: 18.75rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  border-bottom: 3px solid #000;
+}
+
+.main_footer {
+  width: 90rem;
+  height: 35rem;
+  display: flex;
+}
+
+.main_footer_img {
+  width: 43.75rem;
+  height: 35rem;
+  background: var(--0, #E1F1FA);
+}
+
+.main_footer_context {
+  width: 46.25rem;
+  height: 35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.footer_context1 {
+  width: 38.75rem;
+  height: 15rem;
+}
+
+.footer_context1 h1 {
+  color: #000;
+  font-family: Ubuntu;
+  font-size: 2.625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.footer_context1 p {
+  color: #000;
+  font-family: Ubuntu;
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.8125rem; /* 150% */
+  text-transform: uppercase;
+  padding-top: 2rem;
+}
+
+.footer_context1 h2 {
+  color: #000;
+  font-family: Ubuntu;
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.footer_context2 {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.context2 {
+  width: 18.75rem;
+  height: 5rem;
+  padding: 0.625rem 0rem 0.625rem 0.625rem;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.context3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 2rem;
+}
