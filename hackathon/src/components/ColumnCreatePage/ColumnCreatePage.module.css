@@ -20,10 +20,14 @@ ul{
   justify-content: center;
   align-items: center;
   width: 100vw;
+<<<<<<< HEAD
+  max-width: 90rem;
+=======
   margin-top: 1.4rem;
 }
 .background > *{
   max-width: 100rem;
+>>>>>>> acbbd5e36fa52cf3214e301a3e9aa4cf4ce0e7f7
 }
 .columnName{
   display: flex;
