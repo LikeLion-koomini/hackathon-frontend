@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ColumnCreatePage from './components/ColumnCreatePage/ColumnCreatePage';
+import ColumnDetailPage from './components/ColumnDetailPage/ColumnDetailPage';
 import LoginPage from "./components/LoginPage/LoginPage";
 import MainPage from "./components/MainPage/MainPage";
 import SeriesList from "./components/SeriesPage/SeriesList";
@@ -14,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path="/column/create" element={<ColumnCreatePage />} />
           <Route path="/" element={<MainPage />} />
+          <Route path="/column/detail" element={<ColumnDetailPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/seriesList" element={<SeriesList />} />
           <Route path="/seriesList/create" element={<SeriesCreate />} />

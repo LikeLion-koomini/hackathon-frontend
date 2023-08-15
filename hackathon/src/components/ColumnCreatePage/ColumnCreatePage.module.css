@@ -20,10 +20,7 @@ ul{
   justify-content: center;
   align-items: center;
   width: 100vw;
-  margin-top: 1.4rem;
-}
-.background > *{
-  max-width: 100rem;
+  max-width: 90rem;
 }
 .columnName{
   display: flex;
