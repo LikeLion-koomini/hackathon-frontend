@@ -138,7 +138,7 @@ const ColumnCreatePage = ()=>{
   }
   return(
     <div style={{display:"flex", flexDirection:"column",alignItems:"center",}}>
-      <Topbar current="normal" isLogin={false}/>
+      <Topbar current="normal"/>
       {categoryModalActive && 
         <CategoryModal setModalActive={setCategoryModalActive} setCategory={setCategory} categoryNameList={categoryNameList}/>
       }

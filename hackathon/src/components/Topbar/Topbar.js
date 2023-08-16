@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styles from "./Topbar.module.css"
 import images from '../../assets/images/images';
+import { useCookies } from 'react-cookie';
 
 const toolData = {
   'short':"3분 칼럼",
@@ -22,9 +23,10 @@ const toolData = {
 <Topbar isLogin={true}/> : 로그인 했을 경우 topbar
 <Topbar isLogin={false}/> : 로그인 안헀을 경우 topbar
 */
-const Topbar = ({current, isLogin})=>{
+const Topbar = ({current})=>{
   const [toolsJSX, setToolsJSX] = useState([])
-
+  const [isLogin, setIsLogin] = useState([])
+  const [cookie] = useCookies(["access_token"])
   const clickLogoHanlder = ()=>{
     alert("go to mainPage")
   }
@@ -37,6 +39,7 @@ const Topbar = ({current, isLogin})=>{
   }
 
   useEffect(()=>{
+    setIsLogin(()=>cookie.access_token?true:false)
     const newToolsJSX = []
     for(let toolId in toolData){
       const toolName = toolData[toolId];
