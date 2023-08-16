@@ -25,6 +25,7 @@ const toolData = {
 const Topbar = ({ current, isLogin }) => {
   const [toolsJSX, setToolsJSX] = useState([]);
 
+
   const clickLogoHanlder = () => {
     alert("go to mainPage");
   };
@@ -59,19 +60,19 @@ const Topbar = ({ current, isLogin }) => {
   }, [current]);
 
   return (
-    <div className={styles.topbarContainer}>
-      <div className={styles.topbarTools}>
+    <div className="flex flex-col md:flex-row justify-between items-center bg-white border-b-2 border-gray-300 w-full mx-auto h-16 px-4">
+      <div className="flex items-center mb-4 md:mb-0">
         <img
           src={images.logo}
           alt="logo"
-          onClick={clickLogoHanlder}
-          className={styles.logo}
+          onClick={clickLogoHandler}
+          className="w-56 cursor-pointer object-contain"
         />
         {toolsJSX}
       </div>
       {!isLogin && (
         <div
-          className={styles.userStatusTool}
+          className="flex items-center border rounded border-gray-700 p-2 cursor-pointer"
           onClick={clickUserManagerHandler}
         >
           로그인 | 회원가입
@@ -79,7 +80,7 @@ const Topbar = ({ current, isLogin }) => {
       )}
       {isLogin && (
         <div
-          className={styles.userStatusTool}
+          className="flex items-center border rounded border-blue-700 p-2 cursor-pointer"
           onClick={clickUserManagerHandler}
         >
           마이 페이지
