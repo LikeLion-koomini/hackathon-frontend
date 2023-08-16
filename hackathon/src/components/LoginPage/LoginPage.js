@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styles from './LoginPage.module.css';
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 const LoginPage = () => {
 
@@ -26,8 +27,16 @@ const LoginPage = () => {
     } else if (pw.trim().length === 0) {
       setPwValid(true);
     }
-    console.log(id, pw);
-    
+    console.log(id)
+    console.log(pw)
+    axios.post('http://127.0.0.1:8000/user/login/', {
+      userId:id,
+      password:pw,
+    }).then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
   }
 
   // navigate

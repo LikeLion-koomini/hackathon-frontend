@@ -43,11 +43,11 @@ const Topbar = ({current, isLogin})=>{
       console.log(toolName)
       if(toolId==current){
         newToolsJSX.push(
-          <span className={styles.currentTool} id={toolId}>{toolName}</span>
+          <span className={styles.currentTool} id={toolId} key={toolId}>{toolName}</span>
         )
       }else{
         newToolsJSX.push(
-          <span className={styles.tool} id={toolId}>{toolName}</span>
+          <span className={styles.tool} id={toolId} key={toolId}>{toolName}</span>
         )
       }
     }
