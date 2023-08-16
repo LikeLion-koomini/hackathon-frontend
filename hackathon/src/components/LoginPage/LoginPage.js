@@ -81,8 +81,8 @@ const LoginPage = () => {
         <div>Naver</div>
         <div>Google</div>
       </div>
-      <div className={styles.login_forget} onClick={passwordForgetHandler}>
-        <p>Forget Password?</p>
+      <div className={styles.login_forget}>
+        <p onClick={passwordForgetHandler}>Forget Password?</p>
       </div>
     </div>
   );

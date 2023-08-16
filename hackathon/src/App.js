@@ -8,6 +8,7 @@ import ColumnDetailPage from "./components/ColumnDetailPage/ColumnDetailPage";
 import SeriesList from "./components/SeriesPage/SeriesList";
 import SeriesCreate from "./components/SeriesPage/SeriesCreate";
 import SignUp from "./components/SignupPage/Signup";
+import MyPage from "./components/MyPage";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/column" element={<ColumnPage />} />
           <Route path="/column/create" element={<ColumnCreatePage />} />
           <Route path="/column/detail" element={<ColumnDetailPage />} />
+          <Route path="/profile" element={<MyPage />} />
           <Route path="/seriesList" element={<SeriesList />} />
           <Route path="/seriesList/create" element={<SeriesCreate />} />
           <Route path="/signup" element={<SignUp />} />
