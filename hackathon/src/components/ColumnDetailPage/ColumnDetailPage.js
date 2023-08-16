@@ -23,7 +23,6 @@ const ColumnDetailPage = ()=>{
   return(
     <div className={styles.background}>
       <div className={styles.columnHeader}>
-        <img src='' alt=''></img>
         <span className={styles.columnTItle}>{columnData.title}</span>
         <span className={styles.columnInfoContainer}>
           <span className={styles.columnInfo}>{writer}</span>
