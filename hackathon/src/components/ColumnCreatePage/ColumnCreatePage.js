@@ -49,9 +49,9 @@ const ColumnCreatePage = ()=>{
           onClick={categoryModalHandler}
         >
           카테고리 추가 / 삭제
-        </button>
-      ]
-    })
+        </button>,
+      ];
+    });
     let key = 0;
     for(let i=0; i<category.length; i++){
       setCategoryJsxList((prev)=>{
@@ -61,24 +61,24 @@ const ColumnCreatePage = ()=>{
   }, [category]);
 
   const imageHandler = () => {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
     input.click();
 
-    input.addEventListener('change', async () => {
-      if(input.files){
+    input.addEventListener("change", async () => {
+      if (input.files) {
         const file = input.files[0];
         try {
-          const fileReader = new FileReader()
+          const fileReader = new FileReader();
           fileReader.onload = (e) => {
             const imgUrl = fileReader.result;
-            console.log(typeof(imgUrl))
-            const editor = quillRef.current.getEditor(); 
+            console.log(typeof imgUrl);
+            const editor = quillRef.current.getEditor();
             const range = editor.getSelection();
-            editor.insertEmbed(range.index, 'image', imgUrl);
+            editor.insertEmbed(range.index, "image", imgUrl);
             editor.setSelection(range.index + 1);
-          }
+          };
           fileReader.readAsDataURL(file);
         } catch (error) {
           console.log(error);
@@ -86,15 +86,16 @@ const ColumnCreatePage = ()=>{
       }
     });
   };
+
   const modules = useMemo(
     () => ({
       toolbar: {
         container: [
-          [{ header: '1' }, { header: '2' }],
+          [{ header: "1" }, { header: "2" }],
           [{ size: [] }],
-          ['bold', 'italic', 'underline'],
-          [{ list: 'ordered' }, { list: 'bullet' }, { align: [] }],
-          ['image'],
+          ["bold", "italic", "underline"],
+          [{ list: "ordered" }, { list: "bullet" }, { align: [] }],
+          ["image"],
         ],
         handlers: { image: imageHandler },
       },
@@ -102,7 +103,7 @@ const ColumnCreatePage = ()=>{
         matchVisual: false,
       },
     }),
-    [],
+    []
   );
 
   const handleSubmitButton = (event)=>{
@@ -145,30 +146,22 @@ const ColumnCreatePage = ()=>{
       <div className={styles.background}>
         <input type="text" className={styles.columnName} placeholder='칼럼 제목 입력하기'  ref={titleRef}/>
         <div className={styles.contentInputBox}>
-          <span className={styles.inputBoxTitle}>
-            칼럼 내용
-          </span>
+          <span className={styles.inputBoxTitle}>칼럼 내용</span>
           <div>
-            <ReactQuill 
+            <ReactQuill
               onChange={handleQuillChange}
-              modules={modules} 
+              modules={modules}
               ref={quillRef}
               theme="snow"
             />
           </div>
         </div>
         <div className={styles.contentInputBox}>
-          <span className={styles.inputBoxTitle}>
-            카테고리
-          </span>
-          <div className={styles.categoryList}>
-            {categoryJsxList}
-          </div>
+          <span className={styles.inputBoxTitle}>카테고리</span>
+          <div className={styles.categoryList}>{categoryJsxList}</div>
         </div>
         <div className={styles.contentInputBox}>
-          <span className={styles.inputBoxTitle}>
-            가격
-          </span>
+          <span className={styles.inputBoxTitle}>가격</span>
           <div className={styles.priceCheckBoxContainer}>
             <div className={styles.priceCheckBox}>
               <div className={styles.checkBox}>
@@ -193,10 +186,12 @@ const ColumnCreatePage = ()=>{
             </div>
           </div>
         </div>
-        <button className={styles.submitButton} onClick={handleSubmitButton}>발행하기</button>
+        <button className={styles.submitButton} onClick={handleSubmitButton}>
+          발행하기
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ColumnCreatePage;
