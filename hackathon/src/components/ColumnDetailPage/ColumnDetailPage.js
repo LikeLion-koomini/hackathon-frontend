@@ -5,8 +5,6 @@ import "../ColumnDetailPage/ReactQuillStyle.css"
 import axios from 'axios';
 
 const ColumnDetailPage = ()=>{
-  const [editButtonVisible, setEditButtonVisible] = useState(true)
-  const [purchaseButtonVisible, setPurchaseButtonVisible] = useState(true)
   const [columnData, setColumnData] = useState({});
   const [writer, setWriter] = useState()
   const [cookie] = useCookies(['access_token', 'user_uuid'])
