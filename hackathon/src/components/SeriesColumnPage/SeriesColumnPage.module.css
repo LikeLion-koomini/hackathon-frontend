@@ -1,0 +1,97 @@
+.background{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100vw;
+  max-width: 100rem;
+}
+
+.seriesTitle{
+  color: #000;
+  text-align: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5625rem;
+  /* 78.125% */
+  margin-bottom: 1.5rem;
+}
+
+.seriesContent{
+  color: #767676;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5625rem;
+  /* 125% */
+  margin-bottom: 4.3rem;
+}
+
+.seriesColumnListBox{
+  width: 85%;
+}
+
+.seriesColumnTool{
+  display: flex;
+  justify-content: end;
+  column-gap: 2rem;
+
+  width: 100%;
+}
+
+.sortButton{
+  border: none;
+  margin-bottom: 1rem;
+
+  background-color: transparent;
+
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.875rem;
+}
+
+.seriesColumnList{
+  width: 100%;
+  height:3.125rem;
+}
+
+.columnListHeader, .columnListContent{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 3.125rem;
+  text-align: center;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5625rem;
+}
+
+.columnListContent{
+  border-bottom: 0.1rem solid #DFDFDF;
+  color: #767676;
+}
+.columnListHeader{
+  border-top: 0.1rem solid #818181;
+  border-bottom: 0.1rem solid #818181;
+  color: #000;
+}
+
+.columnNumber{
+  width: 15%;
+}
+
+.columnTitle{
+  width: 43%;
+}
+
+.columnCreatedAt{
+  width: 21%;
+}
+
+.columnPrefer{
+  width: 21%;
+}

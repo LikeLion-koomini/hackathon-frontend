@@ -1,31 +1,47 @@
-import React, { useRef, useState, useEffect, useMemo } from "react";
-import styles from "./ColumnCreatePage.module.css";
-import CategoryModal from "../CategoryModal/CategoryModal";
-import Topbar from "../Topbar/Topbar";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import React, {useRef, useState, useEffect, useMemo} from 'react';
+import styles from "./ColumnCreatePage.module.css"
+import CategoryModal from "../CategoryModal/CategoryModal"
+import Topbar from '../Topbar/Topbar';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const categoryNameList = [
   "tag1",
   "tag2",
   "tag3",
-  "long long tag",
-  "very long tag",
-  "so long tag",
-];
+  "tag4",
+  "tag5"
+]
 
-const ColumnCreatePage = () => {
+const ColumnCreatePage = ()=>{
+  // 기본 상태들
   const [categoryJsxList, setCategoryJsxList] = useState([]);
+  const [category, setCategory] = useState([])
   const [content, setContent] = useState();
-  const [categoryModalActive, setCategoryModalActive] = useState(false);
-  const quillRef = useRef();
+  const titleRef = useRef()
+  const [categoryModalActive, setCategoryModalActive] = useState(false)
+  const quillRef = useRef()
+  const [price, setPrice] = useState(0)
+
+  // cookies
+  const [cookie, setCookie, removeCookie] = useCookies(["access_token", "refresh_token", "user_uuid"])
+  //navigateor
+  const navigate = useNavigate()
 
   // 기본 설정
-  const categoryModalHandler = () => {
-    setCategoryModalActive((prev) => !prev);
-  };
-  useEffect(() => {
-    setCategoryJsxList((prev) => {
+  const categoryModalHandler = ()=>{
+    setCategoryModalActive((prev)=>!prev)
+    console.log(category)
+  }
+
+  // 카테고리 목록 추가
+  useEffect(()=>{
+    console.log(cookie.access_token)
+    console.log(category)
+    setCategoryJsxList((prev)=>{
       return [
         <button
           className={styles.categoryManager}
@@ -37,17 +53,12 @@ const ColumnCreatePage = () => {
       ];
     });
     let key = 0;
-    categoryNameList.forEach((item) => {
-      setCategoryJsxList((prev) => {
-        return [
-          ...prev,
-          <div className={styles.category} key={++key}>
-            {item}
-          </div>,
-        ];
-      });
-    });
-  }, []);
+    for(let i=0; i<category.length; i++){
+      setCategoryJsxList((prev)=>{
+        return [...prev,<div className={styles.category} key={++key}>{categoryNameList[i]}</div>]
+      })
+    }
+  }, [category]);
 
   const imageHandler = () => {
     const input = document.createElement("input");
@@ -95,26 +106,45 @@ const ColumnCreatePage = () => {
     []
   );
 
-  const handleSubmitButton = (event) => {
-    console.log(content);
-  };
-  const handleQuillChange = (elements) => {
-    setContent(() => elements);
-  };
-  return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <Topbar current="normal" isLogin={false} />
-      {categoryModalActive && (
-        <CategoryModal setModalActive={setCategoryModalActive} />
-      )}
+  const handleSubmitButton = (event)=>{
+    const title = titleRef.current.value;
+    const columnPrice = price>0?price:0;
+    console.log(title, columnPrice)
+    axios.post(
+      'http://127.0.0.1:8000/column/register/',
+      {
+        title:title,
+        content:content,
+        category:category
+      },
+      {
+        headers:{ Authorization: `Bearer ${cookie.access_token}` },
+      }
+    ).then((res)=>{
+      console.log(res)
+      navigate('/')
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  const handleQuillChange = (elements)=>{
+    setContent(()=>elements)
+  }
+  const handlePriceRadio = (e)=>{
+    if(e.target.value==="free" && price>=0){
+      setPrice(() => -1)
+    }else if(e.target.value==="pay" && price<0){
+      setPrice(() => 0)
+    }
+  }
+  return(
+    <div style={{display:"flex", flexDirection:"column",alignItems:"center",}}>
+      <Topbar current="normal"/>
+      {categoryModalActive && 
+        <CategoryModal setModalActive={setCategoryModalActive} setCategory={setCategory} categoryNameList={categoryNameList}/>
+      }
       <div className={styles.background}>
-        <input
-          type="text"
-          className={styles.columnName}
-          placeholder="칼럼 제목 입력하기"
-        />
+        <input type="text" className={styles.columnName} placeholder='칼럼 제목 입력하기'  ref={titleRef}/>
         <div className={styles.contentInputBox}>
           <span className={styles.inputBoxTitle}>칼럼 내용</span>
           <div>
@@ -135,19 +165,24 @@ const ColumnCreatePage = () => {
           <div className={styles.priceCheckBoxContainer}>
             <div className={styles.priceCheckBox}>
               <div className={styles.checkBox}>
-                <input type="radio" id="free" name="price" value="free" />
-                <label htmlFor="free">무료</label>
+                <input type="radio" id="free" name="price" value="free" onClick={handlePriceRadio}/>
+                <label htmlFor='free'>무료</label>
               </div>
             </div>
             <div className={styles.priceCheckBox}>
               <div className={styles.checkBox}>
-                <input type="radio" name="price" id="free" value="pay" />
+                <input type="radio" name="price" id="free" value="pay" onClick={handlePriceRadio}/>
                 <label htmlFor="pay">유료</label>
               </div>
-              <div className={styles.priceBox}>
-                <label htmlFor="price">가격</label>
-                <input type="text" />
-              </div>
+              {
+                price>=0 &&
+                <div className={styles.priceBox}>
+                  <label htmlFor="price">가격</label>
+                  <input type="text" onChange={
+                    (e)=>{setPrice(()=>e.target.value)}
+                  }/>
+                </div>
+              }
             </div>
           </div>
         </div>

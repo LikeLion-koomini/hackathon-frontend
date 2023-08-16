@@ -40,10 +40,22 @@ const LoginPage = () => {
         alert("로그인 정보가 맞지 않습니다. 다시 로그인해주세요");
       }
     }
-  };
+    console.log(id)
+    console.log(pw)
+    axios.post('http://127.0.0.1:8000/user/login/', {
+      userId:id,
+      password:pw,
+    }).then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
+  // navigate
 
   const passwordForgetHandler = () => {
-    navigate("#");
+    navigate('#');
   };
 
   return (

@@ -3,28 +3,22 @@ import React, { useState, useEffect } from "react";
 import styles from "./CategoryModal.module.css";
 import images from "../../assets/images/images";
 
-const tagList = [
-  "주식",
-  "세금",
-  "펀드",
-  "투자",
-  "보험",
-  "부동산",
-  "예금/적금",
-  "은행",
-  "대출",
-  "환전",
-  "재태크",
-];
+const categoryNameList = [
+  "tag1",
+  "tag2",
+  "tag3",
+  "tag4",
+  "tag5"
+]
 
 // props로 모달창 관리 state(boolean)의 setter를 넘겨준다. :
 // 예시 : <CategoryModal setModalActive={모달창 관리 state의 setter}/>
 
-const CategoryModal = ({ setModalActive }) => {
-  const [addedCategory, setAddedCategory] = useState([]);
-  const [addedCategoryJSX, setAddedCategoryJSX] = useState([]);
-  const [notAddedCategoryJSX, setNotaddedCategoryJSX] = useState([]);
-  const [input, setInput] = useState("");
+const CategoryModal = ({setModalActive, setCategory, categoryNameList})=>{
+  const [addedCategory, setAddedCategory] = useState([])
+  const [addedCategoryJSX, setAddedCategoryJSX] = useState([])
+  const [notAddedCategoryJSX, setNotaddedCategoryJSX] = useState([])
+  const [input, setInput] = useState("")
 
   const categoryBoxHandler = async (e) => {
     let newAddedCategory = [];
@@ -50,34 +44,28 @@ const CategoryModal = ({ setModalActive }) => {
   };
 
   const modalActiveHandler = (e) => {
-    setModalActive((prev) => !prev);
-  };
+    console.log(addedCategory)
+    setCategory(()=>{
+      const resultCategoryList = []
+      for(let i=0; i<categoryNameList.length; i++){
+        if(addedCategory.includes(categoryNameList[i])){
+          resultCategoryList.push(i)
+        }
+      }
+      return resultCategoryList
+    })
+    setModalActive((prev) => !prev)
+  }
 
   useEffect(() => {
     const newAddedCategoryJSX = [];
     const newNotAddedCategoryJSX = [];
-    for (let i = 0; i < tagList.length; i++) {
-      const tagName = tagList[i];
-      if (addedCategory.includes(tagName)) {
-        newAddedCategoryJSX.push(
-          <div
-            className={styles.categoryAdded}
-            onClick={categoryBoxHandler}
-            key={i}
-          >
-            {tagName}
-          </div>
-        );
-      } else if (tagName.includes(input)) {
-        newNotAddedCategoryJSX.push(
-          <div
-            className={styles.categoryNotAdded}
-            onClick={categoryBoxHandler}
-            key={i}
-          >
-            {tagName}
-          </div>
-        );
+    for(let i=0; i<categoryNameList.length; i++){
+      const categoryName = categoryNameList[i]
+      if(addedCategory.includes(categoryName)){
+        newAddedCategoryJSX.push(<div className={styles.categoryAdded} onClick={categoryBoxHandler} key={i}>{categoryName}</div>)
+      }else if(categoryName.includes(input)){
+        newNotAddedCategoryJSX.push(<div className={styles.categoryNotAdded} onClick={categoryBoxHandler} key={i}>{categoryName}</div>)
       }
     }
     setAddedCategoryJSX(() => newAddedCategoryJSX);

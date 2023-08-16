@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import styles from './Signup.module.css';
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 const SignUp = () => {
-
+  // 회원가입 정보
   const [idCheck,setIdCheck] = useState('');
   const [pwCheck,setPwCheck] = useState('');
   const [pw2Check,setPw2Check] = useState('');
@@ -12,9 +13,13 @@ const SignUp = () => {
   const [emailCheck,setEmailCheck] = useState('');
   const [telCheck,setTelCheck] = useState('');
   const navigate = useNavigate();
+
   //form정보에 대한 간단한 유효성 검사 : 비밀번호와 비밀번호 확인이 같은지, 폼에 모든 양식이 기입되어있는지
   const [pwAlert,setPwAlert] = useState(false);
   const [formAlert,setFormAlert] = useState(false);
+
+  // cookie
+  const [cookie, setCookie] = useCookies(['access_token', 'refresh_token', 'user_uuid'])
 
   //form 데이터
   const idChecking = (event) => {
@@ -60,8 +65,27 @@ const SignUp = () => {
       setPwAlert(true);
       return;
     }
-    console.log(idCheck, pwCheck, pw2Check, nameCheck, birthCheck, emailCheck, telCheck);
-    navigate('/login');
+    // console.log(idCheck, pwCheck, pw2Check, nameCheck, birthCheck, emailCheck, telCheck);
+    axios.post('http://127.0.0.1:8000/user/signup/',{
+      userId:idCheck,
+      password:pwCheck,
+      userName:nameCheck,
+      birth:birthCheck,
+      email:emailCheck,
+      phone_number:telCheck,
+    }).then((res)=>{
+      console.log(res)
+      const access_token = res.data.token.access_token
+      const refresh_token = res.data.token.refresh_token
+      const user_uuid = res.data.user.uuid
+      setCookie("access_token", access_token, "/")
+      setCookie("refresh_token", refresh_token, "/")
+      setCookie("user_uuid", user_uuid, "/")
+      navigate('/');
+    }).catch((err)=>{
+      console.log(err)
+      console.log("sign up error!")
+    })
   };
 
   return (
