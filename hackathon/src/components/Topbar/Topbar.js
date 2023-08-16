@@ -56,7 +56,7 @@ const Topbar = ({ current, isLogin }) => {
       }
     }
     setToolsJSX(() => newToolsJSX);
-  }, []);
+  }, [current]);
 
   return (
     <div className={styles.topbarContainer}>
