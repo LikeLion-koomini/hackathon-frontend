@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import styles from "./Topbar.module.css"
-import images from '../../assets/images/images';
+import React, { useState, useEffect } from "react";
+import styles from "./Topbar.module.css";
+import images from "../../assets/images/images";
 
 const toolData = {
-  'short':"3분 칼럼",
-  'normal':"단편 칼럼",
-  'series':"시리즈",
-  'calendar':"캘린더",
-  'community':"커뮤니티",
-}
+  short: "3분 칼럼",
+  normal: "단편 칼럼",
+  series: "시리즈",
+  calendar: "캘린더",
+  community: "커뮤니티",
+};
 
 /*
 1. 현재 페이지 표시
@@ -22,48 +22,71 @@ const toolData = {
 <Topbar isLogin={true}/> : 로그인 했을 경우 topbar
 <Topbar isLogin={false}/> : 로그인 안헀을 경우 topbar
 */
-const Topbar = ({current, isLogin})=>{
-  const [toolsJSX, setToolsJSX] = useState([])
+const Topbar = ({ current, isLogin }) => {
+  const [toolsJSX, setToolsJSX] = useState([]);
 
-  const clickLogoHanlder = ()=>{
-    alert("go to mainPage")
-  }
-  const clickUserManagerHandler = ()=>{
-    if(isLogin){
-      alert("go to mypage")
-    }else{
-      alert("go to login/signup page")
+  const clickLogoHanlder = () => {
+    alert("go to mainPage");
+  };
+  const clickUserManagerHandler = () => {
+    if (isLogin) {
+      alert("go to mypage");
+    } else {
+      alert("go to login/signup page");
     }
-  }
+  };
 
-  useEffect(()=>{
-    const newToolsJSX = []
-    for(let toolId in toolData){
+  useEffect(() => {
+    const newToolsJSX = [];
+    for (let toolId in toolData) {
       const toolName = toolData[toolId];
-      console.log(toolName)
-      if(toolId==current){
+      console.log(toolName);
+      if (toolId === current) {
         newToolsJSX.push(
-          <span className={styles.currentTool} id={toolId}>{toolName}</span>
-        )
-      }else{
+          <span className={styles.currentTool} id={toolId}>
+            {toolName}
+          </span>
+        );
+      } else {
         newToolsJSX.push(
-          <span className={styles.tool} id={toolId}>{toolName}</span>
-        )
+          <span className={styles.tool} id={toolId}>
+            {toolName}
+          </span>
+        );
       }
     }
-    setToolsJSX(()=>newToolsJSX)
-  }, [])
+    setToolsJSX(() => newToolsJSX);
+  }, []);
 
   return (
     <div className={styles.topbarContainer}>
       <div className={styles.topbarTools}>
-        <img src={images.logo} alt='logo' onClick={clickLogoHanlder} className={styles.logo}/>
+        <img
+          src={images.logo}
+          alt="logo"
+          onClick={clickLogoHanlder}
+          className={styles.logo}
+        />
         {toolsJSX}
       </div>
-      {!isLogin && <div className={styles.userStatusTool} onClick={clickUserManagerHandler}>로그인 | 회원가입</div>}
-      {isLogin && <div className={styles.userStatusTool} onClick={clickUserManagerHandler}>마이 페이지</div>}
+      {!isLogin && (
+        <div
+          className={styles.userStatusTool}
+          onClick={clickUserManagerHandler}
+        >
+          로그인 | 회원가입
+        </div>
+      )}
+      {isLogin && (
+        <div
+          className={styles.userStatusTool}
+          onClick={clickUserManagerHandler}
+        >
+          마이 페이지
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Topbar
+export default Topbar;
