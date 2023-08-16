@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import styles from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoginPage = () => {
   const [id, setId] = useState(""); //아이디와 비밀번호가 빈칸이 아닌지 유효성 검사
   const [pw, setPw] = useState("");
   const [idValid, setIdValid] = useState(false);
   const [pwValid, setPwValid] = useState(false);
-
+  const navigate = useNavigate();
   const idHandler = (event) => {
     setIdValid(false);
     setId(event.target.value);
@@ -18,18 +19,28 @@ const LoginPage = () => {
     setPw(event.target.value);
   };
 
-  const loginHandler = (event) => {
+  const loginHandler = async (event) => {
     event.preventDefault();
+
     if (id.trim().length === 0) {
       setIdValid(true);
     } else if (pw.trim().length === 0) {
       setPwValid(true);
-    }
-    console.log(id, pw);
-  };
+    } else {
+      try {
+        const response = await axios.post("http://127.0.0.1:8000/user/login/", {
+          userId: id,
+          password: pw,
+        });
 
-  // navigate
-  const navigate = useNavigate();
+        console.log("Login success:", response.data);
+        navigate("/");
+      } catch (error) {
+        console.error("Login error:", error);
+        alert("로그인 정보가 맞지 않습니다. 다시 로그인해주세요");
+      }
+    }
+  };
 
   const passwordForgetHandler = () => {
     navigate("#");

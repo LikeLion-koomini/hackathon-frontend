@@ -25,7 +25,8 @@ const toolData = {
 const Topbar = ({ current, isLogin }) => {
   const [toolsJSX, setToolsJSX] = useState([]);
 
-  const clickLogoHandler = () => {
+
+  const clickLogoHanlder = () => {
     alert("go to mainPage");
   };
   const clickUserManagerHandler = () => {
@@ -41,7 +42,7 @@ const Topbar = ({ current, isLogin }) => {
     for (let toolId in toolData) {
       const toolName = toolData[toolId];
       console.log(toolName);
-      if (toolId == current) {
+      if (toolId === current) {
         newToolsJSX.push(
           <span className={styles.currentTool} id={toolId}>
             {toolName}
