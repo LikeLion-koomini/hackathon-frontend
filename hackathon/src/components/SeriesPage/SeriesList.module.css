@@ -34,7 +34,6 @@
 .series_box {
   display: flex;
   column-gap: 3.3rem;
-  justify-content: center;
   width: 76rem;
   height: 32rem;
   display: flex;
