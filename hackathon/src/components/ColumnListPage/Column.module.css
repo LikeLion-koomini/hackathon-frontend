@@ -1,0 +1,38 @@
+.columnBox{
+  width: 12rem;
+  height: 14rem;
+  background-color: #E1F1FA;
+  border: 0.05rem solid #C2D1D9;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.columnHeader{
+  height: 70%;
+  padding: 0.5rem;
+}
+.columnInfoBox{
+  display: flex;
+  justify-content: space-between;
+}
+.columnMainText{
+  color: #000;
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-overflow: ellipsis;
+}
+.columnSubText{
+  color: #424B5A;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-overflow: ellipsis;
+}
+.columnFooter{
+  height: 30%;
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 0 0 1rem 1rem;
+}

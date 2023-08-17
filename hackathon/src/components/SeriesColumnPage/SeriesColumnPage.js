@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styles from '../SeriesColumnPage/SeriesColumnPage.module.css'
 import Topbar from '../Topbar/Topbar';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+
 const SeriesColumnPage = ()=>{
   const [seriesData, setSeriesData] = useState({})
   const [columnJSXList, setColumnJSXList] = useState([])
@@ -13,9 +14,10 @@ const SeriesColumnPage = ()=>{
   const [maxPage, setMaxPage] = useState(0)
   const [cookie]= useCookies(["user_uuid"])
   const navigate = useNavigate()
+  const {state} = useLocation()
   // 시리즈 정보 받아옴
   useEffect(() => {
-    const series_id = '59480e71-cddd-46dc-a76e-bd50cbf1301e';
+    const series_id = state?state:'59480e71-cddd-46dc-a76e-bd50cbf1301e';
     // 시리즈 정보 받아옴.
     axios.get(`http://127.0.0.1:8000/series/${series_id}/`)
       .then((res) => {

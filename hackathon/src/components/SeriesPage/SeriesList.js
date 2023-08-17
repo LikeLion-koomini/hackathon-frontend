@@ -3,6 +3,7 @@ import styles from './SeriesList.module.css';
 import { useNavigate } from "react-router-dom";
 import Series from "./Series";
 import axios from 'axios'
+import Topbar from '../Topbar/Topbar';
 
 const SeriesList = () => {
 
@@ -75,23 +76,26 @@ const SeriesList = () => {
   }, [series,page])
 
   return (
-    <div className={styles.series_container}>
-      <div className={styles.series_search}>
-        <input type="search" />
-      </div>
-      <div className={styles.series_tags}>
-        tags, tags, tags
-      </div>
-      <div className={styles.series_box}>
-        {currentPageSeriesList}
-      </div>
-      <div className={styles.series_footer}>
-        <div className={styles.footer_button} style={{visibility:'hidden'}}>
-          <button>시리즈 생성</button>
+    <div>
+      <Topbar current="series"/>
+      <div className={styles.series_container}>
+        <div className={styles.series_search}>
+          <input type="search" />
         </div>
-        <div>{paginationJSX}</div>
-        <div className={styles.footer_button}>
-          <button onClick={createSeriestHandler}>시리즈 생성</button>
+        <div className={styles.series_tags}>
+          tags, tags, tags
+        </div>
+        <div className={styles.series_box}>
+          {currentPageSeriesList}
+        </div>
+        <div className={styles.series_footer}>
+          <div className={styles.footer_button} style={{visibility:'hidden'}}>
+            <button>시리즈 생성</button>
+          </div>
+          <div>{paginationJSX}</div>
+          <div className={styles.footer_button}>
+            <button onClick={createSeriestHandler}>시리즈 생성</button>
+          </div>
         </div>
       </div>
     </div>
