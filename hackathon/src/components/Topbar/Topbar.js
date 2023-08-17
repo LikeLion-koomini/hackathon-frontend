@@ -65,15 +65,15 @@ const Topbar = ({ current }) => {
       }
       if (toolId === current) {
         newToolsJSX.push(
-          <span className={styles.currentTool} id={toolId}>
+          <div className={styles.currentTool} id={toolId} key={toolId}>
             {toolName}
-          </span>
+          </div>
         );
       } else {
         newToolsJSX.push(
-          <span className={styles.tool} id={toolId}>
+          <div className={styles.tool} id={toolId} key={toolId}>
             {toolName}
-          </span>
+          </div>
         );
       }
     }
@@ -82,7 +82,7 @@ const Topbar = ({ current }) => {
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center bg-white border-b-2 border-gray-300 w-full mx-auto h-16 px-4">
-      <div className="flex items-center mb-4 md:mb-0">
+      <div className="flex items-center mb-4 md:mb-0 h-full">
         <img
           src={images.logo}
           alt="logo"

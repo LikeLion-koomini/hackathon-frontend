@@ -3,10 +3,10 @@ import styles from "./ColumnCreatePage.module.css"
 import CategoryModal from "../CategoryModal/CategoryModal"
 import Topbar from '../Topbar/Topbar';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const categoryNameList = [
   "tag1",
@@ -30,6 +30,8 @@ const ColumnCreatePage = ()=>{
   const [cookie, setCookie, removeCookie] = useCookies(["access_token", "refresh_token", "user_uuid"])
   //navigateor
   const navigate = useNavigate()
+  //location
+  const {state} = useLocation()
 
   // 기본 설정
   const categoryModalHandler = ()=>{
@@ -39,8 +41,9 @@ const ColumnCreatePage = ()=>{
 
   // 카테고리 목록 추가
   useEffect(()=>{
-    console.log(cookie.access_token)
     console.log(category)
+    console.log(state)
+    console.log(typeof(state))
     setCategoryJsxList((prev)=>{
       return [
         <button
@@ -110,8 +113,12 @@ const ColumnCreatePage = ()=>{
     const title = titleRef.current.value;
     const columnPrice = price>0?price:0;
     console.log(title, columnPrice)
+    console.log(state)
+    const submitAPI = state?
+      `http://127.0.0.1:8000/series/${state}/column/create/`:
+      'http://127.0.0.1:8000/column/register/'
     axios.post(
-      'http://127.0.0.1:8000/column/register/',
+      submitAPI,
       {
         title:title,
         content:content,
@@ -139,11 +146,13 @@ const ColumnCreatePage = ()=>{
   }
   return(
     <div style={{display:"flex", flexDirection:"column",alignItems:"center",}}>
-      <Topbar current="normal"/>
+      <div className="flex h-fit fixed w-full z-50">
+        <Topbar current="normal"/>
+      </div>
       {categoryModalActive && 
         <CategoryModal setModalActive={setCategoryModalActive} setCategory={setCategory} categoryNameList={categoryNameList}/>
       }
-      <div className={styles.background}>
+      <div className={styles.background} style={{marginTop:100,}}>
         <input type="text" className={styles.columnName} placeholder='칼럼 제목 입력하기'  ref={titleRef}/>
         <div className={styles.contentInputBox}>
           <span className={styles.inputBoxTitle}>칼럼 내용</span>

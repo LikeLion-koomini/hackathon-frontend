@@ -1,3 +1,8 @@
+img{
+  display: flex;
+  width: 30rem;
+}
+
 .ql-container {
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
@@ -472,25 +477,36 @@
   font-family: Monaco, Courier New, monospace;
 }
 
+p img{
+  width: 40%;
+}
 .ql-editor .ql-size-small {
   font-size: 0.75em;
 }
-
+.ql-size-small img{
+  width: 20%;
+}
 .ql-editor .ql-size-large {
   font-size: 1.5em;
 }
-
+.ql-size-large img{
+  width: 60%;
+}
 .ql-editor .ql-size-huge {
   font-size: 2.5em;
 }
-
+.ql-size-huge img{
+  width: 80%;
+}
 .ql-editor .ql-direction-rtl {
   direction: rtl;
   text-align: inherit;
 }
 
 .ql-editor .ql-align-center {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ql-editor .ql-align-justify {
@@ -498,7 +514,9 @@
 }
 
 .ql-editor .ql-align-right {
-  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
 
 .ql-editor.ql-blank::before {
@@ -795,10 +813,6 @@
   background-color: #23241f;
   color: #f8f8f2;
   overflow: visible;
-}
-
-.ql-snow .ql-editor img {
-  max-width: 100%;
 }
 
 .ql-snow .ql-picker {
