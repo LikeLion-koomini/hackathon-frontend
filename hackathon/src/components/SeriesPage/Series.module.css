@@ -5,9 +5,11 @@
 }
 
 .series {
+  display: flex;
   width: 22.5rem;
   height: 13.75325rem;
-  display: flex;
+  box-sizing: border-box;
+  border: 0.05rem solid #C2D1D9;
 }
 
 .series_color {

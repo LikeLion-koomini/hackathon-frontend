@@ -32,12 +32,15 @@
 }
 
 .series_box {
+  display: flex;
+  column-gap: 3.3rem;
+  justify-content: center;
   width: 76rem;
   height: 32rem;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 
@@ -150,4 +153,34 @@
   font-weight: 700;
   line-height: normal;
   cursor: pointer;
+}
+
+/*pagination*/
+.paginationMover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #002947;
+  cursor: pointer;
+}
+
+.paginationIndex,
+.currentpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100rem;
+  width: 2rem;
+  height: 2rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.currentpage {
+  background-color: #002947;
+  color: #fff;
 }
