@@ -1,14 +1,41 @@
-import React from "react";
+import React ,{useState, useEffect} from "react";
 import styles from './SeriesList.module.css';
 import { useNavigate } from "react-router-dom";
+import Series from "./Series";
+import axios from 'axios'
+
+//연습용 seriesList
+const initialList = [
+  {series_id: 1, user : '홍길동',  title : '타이틀', content : 'lorem', created_at : '2023-08-08'}, 
+  {series_id: 2, user : '홍길동',  title : '타이틀', content : 'lorem', created_at : '2023-08-08'},
+  {series_id: 3, user : '홍길동',  title : '타이틀', content : 'lorem', created_at : '2023-08-08'}, 
+  {series_id: 4, user : '홍길동',  title : '타이틀', content : 'lorem', created_at : '2023-08-08'},
+]
 
 const SeriesList = () => {
+
+  const [series,setSeries] = useState(initialList)
 
   // navigate
   const navigate = useNavigate();
   const createSeriestHandler = () => {
     navigate('/seriesList/create');
   };
+
+  //series 정보 받아오기 : 서버에서 객체를 리스트로 받아온다음 map함수로 리스트안의 객체를 분배
+  useEffect(()=> {
+    axios.get('http://127.0.0.1:8000/series/').then(response => {
+      setSeries((prev)=>{
+        return [...prev, response.data];
+      });
+      console.log('성공');
+    }).catch((error) => {
+      console.log(error);
+    })
+  });
+
+  console.log(series);
+
 
   return (
     <div className={styles.series_container}>
@@ -19,108 +46,9 @@ const SeriesList = () => {
         tags, tags, tags
       </div>
       <div className={styles.series_box}>
-        <div className={styles.series}>
-          <div className={styles.series_color}></div>
-          <div className={styles.series_context_box}>
-            <div className={styles.series_context}>
-              <div className={styles.context1}>
-                <h2>작성자 이름</h2>
-                <h2 style={{fontWeight:'700'}}>무료</h2>
-              </div>
-              <h1>시리즈 제목</h1>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur omnis alias exercitationem sit deleniti. Suscipit laudantium eius, doloremque unde optio inventore laborum quos, placeat sit atque, voluptas numquam accusantium consectetur?</p>
-              <div className={styles.context2}>
-                <h3>게시물 : 100개</h3>
-                <h3>2023.08.08</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.series}>
-          <div className={styles.series_color}></div>
-          <div className={styles.series_context_box}>
-            <div className={styles.series_context}>
-              <div className={styles.context1}>
-                <h2>작성자 이름</h2>
-                <h2 style={{fontWeight:'700'}}>무료</h2>
-              </div>
-              <h1>시리즈 제목</h1>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur omnis alias exercitationem sit deleniti. Suscipit laudantium eius, doloremque unde optio inventore laborum quos, placeat sit atque, voluptas numquam accusantium consectetur?</p>
-              <div className={styles.context2}>
-                <h3>게시물 : 100개</h3>
-                <h3>2023.08.08</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.series}>
-          <div className={styles.series_color}></div>
-          <div className={styles.series_context_box}>
-            <div className={styles.series_context}>
-              <div className={styles.context1}>
-                <h2>작성자 이름</h2>
-                <h2 style={{fontWeight:'700'}}>무료</h2>
-              </div>
-              <h1>시리즈 제목</h1>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur omnis alias exercitationem sit deleniti. Suscipit laudantium eius, doloremque unde optio inventore laborum quos, placeat sit atque, voluptas numquam accusantium consectetur?</p>
-              <div className={styles.context2}>
-                <h3>게시물 : 100개</h3>
-                <h3>2023.08.08</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.series}>
-          <div className={styles.series_color}></div>
-          <div className={styles.series_context_box}>
-            <div className={styles.series_context}>
-              <div className={styles.context1}>
-                <h2>작성자 이름</h2>
-                <h2 style={{fontWeight:'700'}}>무료</h2>
-              </div>
-              <h1>시리즈 제목</h1>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur omnis alias exercitationem sit deleniti. Suscipit laudantium eius, doloremque unde optio inventore laborum quos, placeat sit atque, voluptas numquam accusantium consectetur?</p>
-              <div className={styles.context2}>
-                <h3>게시물 : 100개</h3>
-                <h3>2023.08.08</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.series}>
-          <div className={styles.series_color}></div>
-          <div className={styles.series_context_box}>
-            <div className={styles.series_context}>
-              <div className={styles.context1}>
-                <h2>작성자 이름</h2>
-                <h2 style={{fontWeight:'700'}}>무료</h2>
-              </div>
-              <h1>시리즈 제목</h1>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur omnis alias exercitationem sit deleniti. Suscipit laudantium eius, doloremque unde optio inventore laborum quos, placeat sit atque, voluptas numquam accusantium consectetur?</p>
-              <div className={styles.context2}>
-                <h3>게시물 : 100개</h3>
-                <h3>2023.08.08</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.series}>
-          <div className={styles.series_color}></div>
-          <div className={styles.series_context_box}>
-            <div className={styles.series_context}>
-              <div className={styles.context1}>
-                <h2>작성자 이름</h2>
-                <h2 style={{fontWeight:'700'}}>무료</h2>
-              </div>
-              <h1>시리즈 제목</h1>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur omnis alias exercitationem sit deleniti. Suscipit laudantium eius, doloremque unde optio inventore laborum quos, placeat sit atque, voluptas numquam accusantium consectetur?</p>
-              <div className={styles.context2}>
-                <h3>게시물 : 100개</h3>
-                <h3>2023.08.08</h3>
-              </div>
-            </div>
-          </div>
-        </div>
+        {series.map((seriesContent)=>(
+          <Series series={seriesContent}/> //key속성에 {uuid} 삽입
+        ))}
       </div>
       <div className={styles.series_footer}>
         <div className={styles.footer_button} style={{visibility:'hidden'}}>

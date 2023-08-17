@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styles from './SeriesCreate.module.css';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 const SeriesCreate = () => {
 
@@ -18,10 +19,21 @@ const SeriesCreate = () => {
     setDetail(event.target.value)
   }
 
-  const seriesCreateHandler = (event) => {
+  const seriesCreateHandler = async (event) => {
     event.preventDefault();
-    console.log(title, detail);
-    navigate('/seriesList');
+    
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/series/create", {
+        title: title,
+        content: detail,
+      });
+
+      console.log("success", response.data);
+      navigate('/seriesList');
+    } catch (error) {
+      console.error("error", error);
+    }
+
   };
   
   return (
