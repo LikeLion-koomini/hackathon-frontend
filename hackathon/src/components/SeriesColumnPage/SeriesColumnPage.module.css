@@ -2,9 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   width: 100vw;
-  max-width: 100rem;
+  max-width: 150rem;
+  min-width: 70rem;
 }
 
 .seriesTitle{
@@ -70,14 +72,16 @@
   line-height: 1.5625rem;
 }
 
-.columnListContent{
-  border-bottom: 0.1rem solid #DFDFDF;
-  color: #767676;
-}
 .columnListHeader{
   border-top: 0.1rem solid #818181;
   border-bottom: 0.1rem solid #818181;
   color: #000;
+}
+
+.columnListContent {
+  border-bottom: 0.1rem solid #DFDFDF;
+  color: #767676;
+  cursor: pointer;
 }
 
 .columnNumber{
@@ -94,4 +98,52 @@
 
 .columnPrefer{
   width: 21%;
+}
+
+.paginationMover{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #002947;
+  cursor: pointer;
+}
+
+.paginationIndex, .currentpage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100rem;
+  width: 2rem;
+  height: 2rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.currentpage{
+  background-color: #002947;
+  color: #fff;
+}
+
+.paginationAndCreateColumn{
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  margin-top: 2rem;
+}
+
+.createColumnButton{
+  position: absolute;
+  left: 90%;
+  width: 10%;
+  height: 2.3rem;
+  background-color: #002947;
+  border-radius: 0.6rem;
+
+  color:#fff;
+  font-weight: 600;
 }
