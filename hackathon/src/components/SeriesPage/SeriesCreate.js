@@ -23,9 +23,13 @@ const SeriesCreate = () => {
     event.preventDefault();
     
     try {
-      const response = await axios.post("http://127.0.0.1:8000/series/create", {
+      const response = await axios.post("http://127.0.0.1:8000/series/create/", {
         title: title,
         content: detail,
+      },{
+        headers:{}
+      }).then((res)=>{
+        console.log(res)
       });
 
       console.log("success", response.data);

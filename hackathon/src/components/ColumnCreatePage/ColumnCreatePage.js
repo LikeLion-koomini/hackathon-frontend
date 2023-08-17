@@ -27,7 +27,7 @@ const ColumnCreatePage = ()=>{
   const [price, setPrice] = useState(0)
 
   // cookies
-  const [cookie, setCookie, removeCookie] = useCookies(["access_token", "refresh_token", "user_uuid"])
+  const [cookie] = useCookies(["access_token", "refresh_token", "user_uuid"])
   //navigateor
   const navigate = useNavigate()
   //location
