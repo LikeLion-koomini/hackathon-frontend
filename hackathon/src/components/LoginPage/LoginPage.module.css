@@ -90,3 +90,7 @@
   text-decoration-line: underline;
   cursor: pointer;
 }
+
+.login_forget p {
+  text-align: center;
+}
