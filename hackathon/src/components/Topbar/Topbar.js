@@ -14,6 +14,14 @@ const toolData = {
   myPage: "마이페이지",
 };
 
+const urlList = {
+  short:"/column",
+  normal:"/column",
+  series:"/seriesList",
+  calendar:"/calendar",
+  community:"/community",
+  myPage:"/profile",
+}
 /*
 1. 현재 페이지 표시
 <Topbar current="short"/> : 3분 칼럼 파란색
@@ -34,16 +42,20 @@ const Topbar = ({ current }) => {
   const navigate = useNavigate()
 
   const clickLogoHandler = () => {
-    alert("go to mainPage");
+    navigate("/")
   };
   const clickUserManagerHandler = () => {
+    console.log(cookie.access_token)
     if (isLogin) {
       axios.delete("http://127.0.0.1:8000/user/logout/")
       .then((res)=>{
         console.log(res)
-        removeCookie("access_token", { path: "/" })
+        removeCookie("access_token", {path:"/"})
         removeCookie("refresh_token", { path: "/" })
         removeCookie("user_uuid", { path: "/" })
+        setIsLogin(()=>false)
+        console.log(isLogin)
+        console.log("accessToken:\n"+cookie.access_token)
         navigate("/")
       }).catch((err)=>{
         console.error(err)
@@ -52,33 +64,41 @@ const Topbar = ({ current }) => {
       navigate("/login")
     }
   };
-
-  useEffect(() => {
+  const clickTopbarToolsHandler = (e) =>{
+    const toolId = e.target.id;
+    const urlName = urlList[toolId]
+    const state = toolId==="normal"?"normal":"short";
+    navigate(urlName, {state:state})
+  }
+  useEffect(()=>{
     if(cookie.access_token){
       setIsLogin(()=>true)
     }
+  },[])
+  useEffect(() => {
+    console.log(cookie.access_token)
     const newToolsJSX = [];
     for (let toolId in toolData) {
       const toolName = toolData[toolId];
-      if(!isLogin && toolName==="마이페이지"){
+      if(cookie.access_token && toolName==="마이페이지"){
         continue;
       }
       if (toolId === current) {
         newToolsJSX.push(
-          <div className={styles.currentTool} id={toolId} key={toolId}>
+          <div className={styles.currentTool} id={toolId} key={toolId} onClick={clickTopbarToolsHandler}>
             {toolName}
           </div>
         );
       } else {
         newToolsJSX.push(
-          <div className={styles.tool} id={toolId} key={toolId}>
+          <div className={styles.tool} id={toolId} key={toolId} onClick={clickTopbarToolsHandler}>
             {toolName}
           </div>
         );
       }
     }
     setToolsJSX(() => newToolsJSX);
-  }, [current]);
+  }, [current, cookie.access_token, cookie.user_uuid, isLogin]);
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center bg-white border-b-2 border-gray-300 w-full mx-auto h-16 px-4">
