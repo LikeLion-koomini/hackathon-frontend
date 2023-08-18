@@ -4,6 +4,7 @@ import Topbar from '../Topbar/Topbar';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from 'react-cookie';
+import { BASE_URL } from "../../utils/config";
 
 const LoginPage = () => {
   const [id, setId] = useState(""); //아이디와 비밀번호가 빈칸이 아닌지 유효성 검사
@@ -32,7 +33,7 @@ const LoginPage = () => {
       setPwValid(true);
     } else {
       try {
-        const response = await axios.post("http://127.0.0.1:8000/user/login/", {
+        const response = await axios.post(`${BASE_URL}/user/login/`, {
           userId: id,
           password: pw,
         });
@@ -46,7 +47,7 @@ const LoginPage = () => {
     }
     console.log(id)
     console.log(pw)
-    axios.post('http://127.0.0.1:8000/user/login/', {
+    axios.post(`${BASE_URL}/user/login/`, {
       userId:id,
       password:pw,
     }).then((res)=>{
