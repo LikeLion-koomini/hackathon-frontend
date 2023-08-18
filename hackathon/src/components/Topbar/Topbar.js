@@ -36,7 +36,7 @@ const urlList = {
 */
 const Topbar = ({ current }) => {
   const [toolsJSX, setToolsJSX] = useState([]);
-  const [cookie, removeCookie] = useCookies(["access_token", "refresh_token", "user_uuid", "isLogin"])
+  const [cookie, setCookie,removeCookie] = useCookies(["access_token", "refresh_token", "user_uuid", "isLogin"])
   const navigate = useNavigate()
 
   const clickLogoHandler = () => {
@@ -44,8 +44,10 @@ const Topbar = ({ current }) => {
   };
   const clickUserManagerHandler = () => {
     console.log(cookie.access_token)
-    if (cookie.isLogin) {
-      axios.delete(`${BASE_URL}/user/logout`)
+
+    if (cookie.isLogin==="true") {
+      axios.delete(`${BASE_URL}/user/logout/`)
+
       .then((res)=>{
         console.log(res)
         removeCookie("access_token", {path:"/"})
@@ -68,6 +70,7 @@ const Topbar = ({ current }) => {
     navigate(urlName, {state:state})
   }
   useEffect(() => {
+    setCookie("isLogin", "false", {path:"/"})
     console.log(cookie.access_token)
     console.log(typeof(cookie.isLogin))
     const newToolsJSX = [];
@@ -104,7 +107,7 @@ const Topbar = ({ current }) => {
         />
         {toolsJSX}
       </div>
-      {cookie.isLogin==="false" && (
+      {cookie.isLogin=="false" && (
         <div
           className="flex items-center border rounded border-gray-700 p-2 cursor-pointer"
           onClick={clickUserManagerHandler}
@@ -112,7 +115,7 @@ const Topbar = ({ current }) => {
           로그인 | 회원가입 
         </div>
       )}
-      {cookie.isLogin==="true" && (
+      {cookie.isLogin=="true" && (
         <div
           className="flex items-center border rounded border-blue-700 p-2 cursor-pointer"
           onClick={clickUserManagerHandler}
