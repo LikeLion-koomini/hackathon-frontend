@@ -81,31 +81,6 @@ const ColumnListPage = ()=>{
     }
     setColumnList(()=>newColumnData)
   }, [allColumnData])
-
-  const renderCategory = () => {
-    return(
-      <button
-        className={styles.categoryManager}
-        key={0}
-        onClick={categoryModalHandler}
-      >
-        카테고리 추가 / 삭제
-      </button>
-    )
-  }
-  const renderCategoryJSXList = ()=>{
-    let key = 0;
-    for(let i=0; i<category.length; i++){
-      setCategoryJsxList((prev)=>
-        [...prev,<div className={styles.category} key={++key}>{categoryNameList[i]}</div>]
-      )
-    }
-  }
-  useEffect(()=>{
-    setCategoryJsxList(()=>renderCategory()
-    );
-    renderCategoryJSXList()
-  }, [category]);
   const searchHandler = ()=>{
     axios.get('http://127.0.0.1:8000/column/search/',{
       params:{
