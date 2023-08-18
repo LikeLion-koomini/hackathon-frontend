@@ -77,7 +77,7 @@ const LoginPage = () => {
       <div className={styles.login_container}>
         <div className={styles.login_logo}>
           <h1>
-            Economys<span>Times</span>
+            Economy<span>Times</span>
           </h1>
         </div>
         <form onSubmit={loginHandler}>
