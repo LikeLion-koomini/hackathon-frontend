@@ -27,6 +27,7 @@ const SignUp = () => {
   const idChecking = (event) => {
     setFormAlert(false);
     setIdCheck(event.target.value);
+    
   };
   const pwChecking = (event) => {
     setFormAlert(false);
@@ -103,9 +104,9 @@ const SignUp = () => {
                 <label htmlFor="id">아이디</label>
               </div>
               <div className={styles.form_input1}>
-                <input onChange={idChecking} type="text" id="id"/>
+                <input type="text" id="id"/>
               </div>
-              <button>중복확인</button>
+              <button onClick={idChecking}>중복확인</button>
             </div>
             <div className={styles.signup_form}>
               <div className={styles.form_label}>
@@ -158,7 +159,7 @@ const SignUp = () => {
           </div>
           {pwAlert && <div className={styles.signup_alert}>비밀번호를 다시 확인해주세요</div>}
           {formAlert && <div className={styles.signup_alert}>모든 정보를 기입해주세요</div>}
-          <div className={styles.signup_button}>
+          <div className={styles.signup_button} onClick={signUpHandler}>
             <button>회원가입</button>
           </div>
         </form>
