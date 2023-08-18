@@ -26,7 +26,7 @@ const MainPage = () => {
       <div className="flex h-fit fixed bg-white w-full z-50">
       <Topbar current="main"/>
       </div>
-      <div className={styles.main_container}>
+      <div className={"flex w-full flex-col justify-center items-center"}>
         <div className={styles.main_img} style={{marginTop:50}}>
           <img src="" alt="" />
         </div>
