@@ -28,7 +28,7 @@ const MainPage = () => {
       </div>
       <div className={"flex w-full flex-col justify-center items-center"}>
         <div className={"flex mt-28 w-full bg-slate-300 h-96"}>
-          <img src="" alt="" />
+          <img src={images.mainBanner} alt="메인 배너" />
         </div>
         <div className={styles.main_section1}>
           <div className={styles.section1}>

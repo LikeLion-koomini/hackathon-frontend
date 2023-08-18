@@ -10,5 +10,7 @@ const images = {
   mainPageImg7: require('../images/mainPageImg7.png'),
   mainPageImg8: require('../images/mainPageImg8.png'),
   mainPageImg9: require('../images/mainPageImg9.png'),
+  mainBanner:require('../images/mainBanner.jpg'),
+  
 };
 export default images;
