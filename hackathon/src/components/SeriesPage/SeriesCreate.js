@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import styles from './SeriesCreate.module.css';
 import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import axios from 'axios'
+import { BASE_URL } from '../../utils/config';
 
 const SeriesCreate = () => {
-
+  const [cookie] = useCookies(["access_token"])
   const [title,setTitle] = useState('');
   const [detail,setDetail] = useState('');
 
@@ -23,16 +25,14 @@ const SeriesCreate = () => {
     event.preventDefault();
     
     try {
-      const response = await axios.post("http://127.0.0.1:8000/series/create/", {
+      const response = await axios.post(`${BASE_URL}/series/create/`, {
         title: title,
         content: detail,
       },{
-        headers:{}
+        headers:{ Authorization: `Bearer ${cookie.access_token}` },
       }).then((res)=>{
         console.log(res)
       });
-
-      console.log("success", response.data);
       navigate('/seriesList');
     } catch (error) {
       console.error("error", error);

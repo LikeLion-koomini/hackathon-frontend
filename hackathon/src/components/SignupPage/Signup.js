@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import Topbar from '../Topbar/Topbar';
+import { BASE_URL } from '../../utils/config';
 const SignUp = () => {
   // 회원가입 정보
   const [idCheck,setIdCheck] = useState('');
@@ -67,7 +68,7 @@ const SignUp = () => {
       return;
     }
     // console.log(idCheck, pwCheck, pw2Check, nameCheck, birthCheck, emailCheck, telCheck);
-    axios.post('http://127.0.0.1:8000/user/signup/',{
+    axios.post(`${BASE_URL}/user/signup/`,{
       userId:idCheck,
       password:pwCheck,
       userName:nameCheck,

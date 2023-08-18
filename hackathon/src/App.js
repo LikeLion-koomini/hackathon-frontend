@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ColumnListPage from "./components/ColumnListPage/ColumnListPage"
+import ColumnListPage from "./components/ColumnListPage/ColumnListPage";
 import ColumnCreatePage from "./components/ColumnCreatePage/ColumnCreatePage";
 import ColumnDetailPage from "./components/ColumnDetailPage/ColumnDetailPage";
 import LoginPage from "./components/LoginPage/LoginPage";

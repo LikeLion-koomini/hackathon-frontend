@@ -6,6 +6,7 @@ import ReactQuill from 'react-quill';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { BASE_URL } from '../../utils/config';
 
 const categoryNameList = [
   "tag1",
@@ -116,14 +117,16 @@ const ColumnCreatePage = ()=>{
     console.log(title, columnPrice)
     console.log(state)
     const submitAPI = state?
-      `http://127.0.0.1:8000/series/${state}/column/create/`:
-      'http://127.0.0.1:8000/column/register/'
+      `${BASE_URL}/series/${state}/column/create/`:
+      `${BASE_URL}/column/register/`
+    console.log(cookie.access_token)
     axios.post(
       submitAPI,
       {
         title:title,
         content:content,
-        category:category
+        category:category,
+        price:price,
       },
       {
         headers:{ Authorization: `Bearer ${cookie.access_token}` },

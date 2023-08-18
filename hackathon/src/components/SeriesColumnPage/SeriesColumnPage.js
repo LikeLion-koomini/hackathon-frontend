@@ -5,6 +5,7 @@ import Topbar from '../Topbar/Topbar';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { BASE_URL } from '../../utils/config';
 
 const SeriesColumnPage = ()=>{
   const [seriesData, setSeriesData] = useState({})
@@ -20,7 +21,7 @@ const SeriesColumnPage = ()=>{
   useEffect(() => {
     const series_id = state?state:'59480e71-cddd-46dc-a76e-bd50cbf1301e';
     // 시리즈 정보 받아옴.
-    axios.get(`http://127.0.0.1:8000/series/${series_id}/`)
+    axios.get(`${BASE_URL}/series/${series_id}/`)
       .then((res) => {
         console.log(res.data)
         const seriesData = res.data;
@@ -30,7 +31,7 @@ const SeriesColumnPage = ()=>{
         console.log(err);
       });
     // 시리즈 관련 칼럼 정보 받아옴
-    axios.get(`http://127.0.0.1:8000/series/${series_id}/column/`)
+    axios.get(`${BASE_URL}/series/${series_id}/column/`)
       .then((res) => {
         const columnDataList = res.data;
         const maxPage = Math.ceil(columnDataList.length / 6);

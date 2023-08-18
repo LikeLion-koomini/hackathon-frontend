@@ -5,6 +5,7 @@ import images from "../../assets/images/images";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { setCookie } from '../../utils/cookie';
 import { BASE_URL } from "../../utils/config";
 
 const toolData = {
@@ -32,15 +33,10 @@ const urlList = {
 <Topbar current="calendar"/> : 캘린더 파란색
 <Topbar current="community"/> : 커뮤니티 파란색
 <Topbar current="myPage"/> : 커뮤니티 파란색
-
-2. 로그인 여부 표시
-<Topbar isLogin={true}/> : 로그인 했을 경우 topbar
-<Topbar isLogin={false}/> : 로그인 안헀을 경우 topbar
 */
 const Topbar = ({ current }) => {
   const [toolsJSX, setToolsJSX] = useState([]);
-  const [isLogin, setIsLogin] = useState(false);
-  const [cookie, removeCookie] = useCookies(["access_token", "refresh_token", "user_uuid"])
+  const [cookie, removeCookie] = useCookies(["access_token", "refresh_token", "user_uuid", "isLogin"])
   const navigate = useNavigate()
 
   const clickLogoHandler = () => {
@@ -55,8 +51,7 @@ const Topbar = ({ current }) => {
         removeCookie("access_token", {path:"/"})
         removeCookie("refresh_token", { path: "/" })
         removeCookie("user_uuid", { path: "/" })
-        setIsLogin(()=>false)
-        console.log(isLogin)
+        setCookie("isLogin", "false", {path:"/"})
         console.log("accessToken:\n"+cookie.access_token)
         navigate("/")
       }).catch((err)=>{
@@ -71,18 +66,14 @@ const Topbar = ({ current }) => {
     const urlName = urlList[toolId]
     const state = toolId==="normal"?"normal":"short";
     navigate(urlName, {state:state})
-  } 
-  useEffect(()=>{
-    if(cookie.access_token){
-      setIsLogin(()=>true)
-    }
-  },[cookie.access_token])
+  }
   useEffect(() => {
     console.log(cookie.access_token)
+    console.log(typeof(cookie.isLogin))
     const newToolsJSX = [];
     for (let toolId in toolData) {
       const toolName = toolData[toolId];
-      if(cookie.access_token && toolName==="마이페이지"){
+      if(cookie.isLogin==="false" && toolName==="마이페이지"){
         continue;
       }
       if (toolId === current) {
@@ -100,7 +91,7 @@ const Topbar = ({ current }) => {
       }
     }
     setToolsJSX(() => newToolsJSX);
-  }, [current, cookie.access_token, cookie.user_uuid, isLogin]);
+  }, [current, cookie.access_token, cookie.user_uuid, cookie.isLogin]);
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center bg-white border-b-2 border-gray-300 w-full mx-auto h-16 px-4">
@@ -113,15 +104,15 @@ const Topbar = ({ current }) => {
         />
         {toolsJSX}
       </div>
-      {!isLogin && (
+      {cookie.isLogin==="false" && (
         <div
           className="flex items-center border rounded border-gray-700 p-2 cursor-pointer"
           onClick={clickUserManagerHandler}
         >
-          로그인 | 회원가입
+          로그인 | 회원가입 
         </div>
       )}
-      {isLogin && (
+      {cookie.isLogin==="true" && (
         <div
           className="flex items-center border rounded border-blue-700 p-2 cursor-pointer"
           onClick={clickUserManagerHandler}

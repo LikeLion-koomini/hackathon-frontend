@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Series from "./Series";
 import axios from 'axios'
 import Topbar from '../Topbar/Topbar';
+import { BASE_URL } from '../../utils/config';
 
 const SeriesList = () => {
 
@@ -22,7 +23,7 @@ const SeriesList = () => {
 
   //series 정보 받아오기 : 서버에서 객체를 리스트로 받아온다음 map함수로 리스트안의 객체를 분배
   useEffect(()=> {
-    axios.get('http://127.0.0.1:8000/series/').then(response => {
+    axios.get(`${BASE_URL}/series/`).then(response => {
       console.log(response)
       const allSeriesData = response.data
       const newSeriesData = [];

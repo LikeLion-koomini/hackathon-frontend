@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [pwValid, setPwValid] = useState(false);
   const navigate = useNavigate();
   // cookies
-  const [cookie, setCookie] = useCookies(["access_token", "refresh_token", "user_uuid"])
+  const [cookie, setCookie] = useCookies(["access_token", "refresh_token", "user_uuid", "isLogin"])
   const idHandler = (event) => {
     setIdValid(false);
     setId(event.target.value);
@@ -60,6 +60,9 @@ const LoginPage = () => {
       setCookie("access_token", access_token, {path:"/"})
       setCookie("refresh_token", refresh_token, {path:"/"})
       setCookie("user_uuid", user_uuid, {path:"/"})
+      setCookie("isLogin", "true", {path:"/"})
+      window.location.reload()
+      navigate("/")
     }).catch((err)=>{
       console.log(err)
     })
@@ -68,7 +71,7 @@ const LoginPage = () => {
   // navigate
 
   const passwordForgetHandler = () => {
-    navigate('#');
+    navigate("/signup")
   };
 
   return (
@@ -109,7 +112,7 @@ const LoginPage = () => {
           <div>Google</div>
         </div>
         <div className={styles.login_forget}>
-          <p onClick={passwordForgetHandler}>Forget Password?</p>
+          <p onClick={passwordForgetHandler}>회원가입</p>
         </div>
       </div>
     </div>
