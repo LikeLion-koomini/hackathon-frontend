@@ -27,7 +27,7 @@ const MainPage = () => {
       <Topbar current="main"/>
       </div>
       <div className={styles.main_container}>
-        <div className={styles.main_img}>
+        <div className={styles.main_img} style={{marginTop:50}}>
           <img src="" alt="" />
         </div>
         <div className={styles.main_section1}>
