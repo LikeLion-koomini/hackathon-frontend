@@ -12,7 +12,7 @@ const LoginPage = () => {
   const [pwValid, setPwValid] = useState(false);
   const navigate = useNavigate();
   // cookies
-  const [cookie, setCookie, removeCookie] = useCookies(["access_token", "refresh_token", "user_uuid"])
+  const [cookie, setCookie] = useCookies(["access_token", "refresh_token", "user_uuid"])
   const idHandler = (event) => {
     setIdValid(false);
     setId(event.target.value);

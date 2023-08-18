@@ -5,8 +5,7 @@ import Topbar from '../Topbar/Topbar';
 import ReactQuill from 'react-quill';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const categoryNameList = [
   "tag1",
@@ -57,11 +56,13 @@ const ColumnCreatePage = ()=>{
     });
     let key = 0;
     for(let i=0; i<category.length; i++){
+      // eslint-disable-next-line no-loop-func
       setCategoryJsxList((prev)=>{
         return [...prev,<div className={styles.category} key={++key}>{categoryNameList[i]}</div>]
       })
     }
-  }, [category]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, state]);
 
   const imageHandler = () => {
     const input = document.createElement("input");
@@ -145,7 +146,7 @@ const ColumnCreatePage = ()=>{
     }
   }
   return(
-    <div style={{display:"flex", flexDirection:"column",alignItems:"center",}}>
+    <div style={{display:"flex", flexDirection:"column",alignItems:"center", justifyContent:'center'}}>
       <div className="flex h-fit fixed w-full z-50">
         <Topbar current="normal"/>
       </div>

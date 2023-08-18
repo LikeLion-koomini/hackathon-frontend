@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Column.module.css';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
 const Column = ({data})=>{
   const [columnType, setColumnType] = useState("none")

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import styles from "./Topbar.module.css";
 import images from "../../assets/images/images";
@@ -74,7 +75,7 @@ const Topbar = ({ current }) => {
     if(cookie.access_token){
       setIsLogin(()=>true)
     }
-  },[])
+  },[cookie.access_token])
   useEffect(() => {
     console.log(cookie.access_token)
     const newToolsJSX = [];

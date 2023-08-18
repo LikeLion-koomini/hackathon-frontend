@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import Topbar from '../Topbar/Topbar';
 import CategoryModal from '../CategoryModal/CategoryModal';
@@ -51,12 +52,13 @@ const ColumnListPage = ()=>{
     });
     let key = 0;
     for(let i=0; i<category.length; i++){
+      // eslint-disable-next-line no-loop-func
       setCategoryJsxList((prev)=>{
         return [...prev,<div className={styles.category} key={++key}>{categoryNameList[i]}</div>]
       })
     }
   }, [category]);
-  const listset = [1]
+  // const listset = [1]
   useEffect(()=>{
     axios.get('http://127.0.0.1:8000/column/')
     .then((res)=>{
@@ -113,11 +115,12 @@ const ColumnListPage = ()=>{
     //현재 페이지 시리즈 목록 재생성
     setColumnJSXList(()=>[])
     columnList[page].map((data)=>{
+      return(
       setColumnJSXList((prev)=>[
         ...prev,
          <Column key={data.column_id} data={data}/>
       ])
-    })
+    )})
     // 페이지네이션 재생성
     const paginationStart = Math.floor(page/3)+1
     setPaginationJSX(()=>{

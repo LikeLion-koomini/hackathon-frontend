@@ -22,7 +22,7 @@ const ColumnDetailPage = ()=>{
       setColumnData(()=>res.data.column)
       setWriter(()=>res.data.writer)
     })
-  }, [])
+  }, [state])
   return(
     <div className={styles.background}>
       <div className={styles.columnHeader}>

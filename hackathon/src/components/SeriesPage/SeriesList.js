@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React ,{useState, useEffect} from "react";
 import styles from './SeriesList.module.css';
 import { useNavigate } from "react-router-dom";
@@ -55,11 +56,12 @@ const SeriesList = () => {
     //현재 페이지 시리즈 목록 재생성
     setCurrentPageSeriesList(()=>[])
     series[page].map((data)=>{
+      return(
       setCurrentPageSeriesList((prev)=>[
         ...prev,
          <Series series={data} key={data.series_id}/>
       ])
-    })
+    )})
     // 페이지네이션 재생성
     const paginationStart = Math.floor(page/3)+1
     setPaginationJSX(()=>{

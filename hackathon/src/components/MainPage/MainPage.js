@@ -23,9 +23,11 @@ const MainPage = () => {
 
   return (
     <div>
+      <div className="flex h-fit fixed bg-white w-full z-50">
       <Topbar current="main"/>
-      <div className={styles.main_container} style={{marginTop:50}}>
-        <div className={styles.main_input}>
+      </div>
+      <div className={styles.main_container}>
+        <div className={styles.main_input} style={{marginTop:50}}>
           <input type="search" />
         </div>
         <div className={styles.main_img}>
