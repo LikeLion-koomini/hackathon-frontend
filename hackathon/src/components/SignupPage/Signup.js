@@ -27,7 +27,6 @@ const SignUp = () => {
   const idChecking = (event) => {
     setFormAlert(false);
     setIdCheck(event.target.value);
-    
   };
   const pwChecking = (event) => {
     setFormAlert(false);
@@ -95,7 +94,6 @@ const SignUp = () => {
     <div>
       <Topbar/>
       <div className={styles.signup_container}>
-        <h1 style={{fontSize:'2.4rem'}}>Economy<span>Times</span></h1>
         <h1>회원가입</h1>
         <form onSubmit={signUpHandler}>
           <div className={styles.signup_box}>
