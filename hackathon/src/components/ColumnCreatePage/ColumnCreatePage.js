@@ -117,12 +117,14 @@ const ColumnCreatePage = ()=>{
     const submitAPI = state?
       `http://127.0.0.1:8000/series/${state}/column/create/`:
       'http://127.0.0.1:8000/column/register/'
+    console.log(cookie.access_token)
     axios.post(
       submitAPI,
       {
         title:title,
         content:content,
-        category:category
+        category:category,
+        price:price,
       },
       {
         headers:{ Authorization: `Bearer ${cookie.access_token}` },

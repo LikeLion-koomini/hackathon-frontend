@@ -35,29 +35,6 @@ const ColumnListPage = ()=>{
   }
   // 카테고리 목록 추가
   useEffect(()=>{
-    console.log(category)
-    console.log(state)
-    console.log(typeof(state))
-    setCategoryJsxList((prev)=>{
-      return [
-        <button
-          className={styles.categoryManager}
-          key={0}
-          onClick={categoryModalHandler}
-        >
-          카테고리 추가 / 삭제
-        </button>,
-      ];
-    });
-    let key = 0;
-    for(let i=0; i<category.length; i++){
-      setCategoryJsxList((prev)=>{
-        return [...prev,<div className={styles.category} key={++key}>{categoryNameList[i]}</div>]
-      })
-    }
-  }, [category]);
-  const listset = [1]
-  useEffect(()=>{
     axios.get('http://127.0.0.1:8000/column/')
     .then((res)=>{
       setAllColumnData(()=>res.data)
@@ -65,6 +42,44 @@ const ColumnListPage = ()=>{
       console.error(err)
     })
   },[])
+  useEffect(()=>{
+    const newColumnData = [];
+    const columnPerPage = 10;
+    for(let i=0; i<allColumnData.length; i++){
+      let currentPage = Math.floor(i/columnPerPage)
+      setMaxPage(()=>Math.ceil(allColumnData.length/columnPerPage))
+      if(!newColumnData[currentPage]){
+        newColumnData[currentPage] = []
+      }
+      newColumnData[currentPage].push(allColumnData[i])
+    }
+    setColumnList(()=>newColumnData)
+  }, [allColumnData])
+
+  const renderCategory = () => {
+    return(
+      <button
+        className={styles.categoryManager}
+        key={0}
+        onClick={categoryModalHandler}
+      >
+        카테고리 추가 / 삭제
+      </button>
+    )
+  }
+  const renderCategoryJSXList = ()=>{
+    let key = 0;
+    for(let i=0; i<category.length; i++){
+      setCategoryJsxList((prev)=>
+        [...prev,<div className={styles.category} key={++key}>{categoryNameList[i]}</div>]
+      )
+    }
+  }
+  useEffect(()=>{
+    setCategoryJsxList(()=>renderCategory()
+    );
+    renderCategoryJSXList()
+  }, [category]);
   const searchHandler = ()=>{
     axios.get('http://127.0.0.1:8000/column/search/',{
       params:{
@@ -78,21 +93,6 @@ const ColumnListPage = ()=>{
       console.error(err)
     })
   }
-  useEffect(()=>{
-    const newColumnData = [];
-    const columnPerPage = 10;
-    for(let i=0; i<allColumnData.length; i++){
-      let currentPage = Math.floor(i/columnPerPage)
-      setMaxPage(()=>{
-        return Math.ceil(allColumnData.length/columnPerPage)
-      })
-      if(!newColumnData[currentPage]){
-        newColumnData[currentPage] = []
-      }
-      newColumnData[currentPage].push(allColumnData[i])
-    }
-    setColumnList(()=>newColumnData)
-  }, [allColumnData])
 
   const pageHandler = (e)=>{
     const pageNumber = Number(e.target.innerText)-1
@@ -107,32 +107,32 @@ const ColumnListPage = ()=>{
     setPage(()=>pageNumber)
   }
   useEffect(()=>{
-    if(!columnList[page]){
-      return;
-    }
-    //현재 페이지 시리즈 목록 재생성
-    setColumnJSXList(()=>[])
-    columnList[page].map((data)=>{
-      setColumnJSXList((prev)=>[
-        ...prev,
-         <Column key={data.column_id} data={data}/>
-      ])
-    })
-    // 페이지네이션 재생성
-    const paginationStart = Math.floor(page/3)+1
-    setPaginationJSX(()=>{
-      return(
-        <div className="flex flex-row w-full justify-center gap-4">
-          <div className={styles.paginationMover} onClick={prevPageHandler}>&lt;</div>
-          {paginationStart<=maxPage && <div className={paginationStart-1===page?styles.currentpage:styles.paginationIndex} onClick={pageHandler}>{paginationStart}</div>}
-          {paginationStart+1<=maxPage && <div className={paginationStart===page?styles.currentpage:styles.paginationIndex} onClick={pageHandler}>{paginationStart+1}</div>}
-          {paginationStart+2<=maxPage && <div className={paginationStart+1===page?styles.currentpage:styles.paginationIndex} onClick={pageHandler}>{paginationStart+2}</div>}
-          <div className={styles.paginationMover} onClick={nextPageHandler}>&gt;</div>
-        </div>
+    if(columnList[page]){
+      //현재 페이지 시리즈 목록 재생성
+      setColumnJSXList(()=>[])
+      columnList[page].map((data)=>{
+        setColumnJSXList((prev)=>[
+          ...prev,
+          <Column key={data.column_id} data={data}/>
+        ])
+      })
+      // 페이지네이션 재생성
+      const paginationStart = Math.floor(page/3)+1
+      setPaginationJSX(()=>
+        (
+          <div className="flex flex-row w-full justify-center gap-4">
+            <div className={styles.paginationMover} onClick={prevPageHandler}>&lt;</div>
+            {paginationStart<=maxPage && <div className={paginationStart-1===page?styles.currentpage:styles.paginationIndex} onClick={pageHandler}>{paginationStart}</div>}
+            {paginationStart+1<=maxPage && <div className={paginationStart===page?styles.currentpage:styles.paginationIndex} onClick={pageHandler}>{paginationStart+1}</div>}
+            {paginationStart+2<=maxPage && <div className={paginationStart+1===page?styles.currentpage:styles.paginationIndex} onClick={pageHandler}>{paginationStart+2}</div>}
+            <div className={styles.paginationMover} onClick={nextPageHandler}>&gt;</div>
+          </div>
+        )
       )
-    })
+    }
   }, [columnList,page,state])
   const columnCreateHandler = (e)=>{
+    window.location.reload()
     navigate("/column/create")
   }
   return(
