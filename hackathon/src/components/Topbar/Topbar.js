@@ -5,6 +5,7 @@ import images from "../../assets/images/images";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { BASE_URL } from "../../utils/config";
 
 const toolData = {
   short: "3분 칼럼",
@@ -48,7 +49,7 @@ const Topbar = ({ current }) => {
   const clickUserManagerHandler = () => {
     console.log(cookie.access_token)
     if (isLogin) {
-      axios.delete("http://127.0.0.1:8000/user/logout/")
+      axios.delete(`${BASE_URL}/user/logout/`)
       .then((res)=>{
         console.log(res)
         removeCookie("access_token", {path:"/"})
