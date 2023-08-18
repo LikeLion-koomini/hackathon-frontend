@@ -44,8 +44,10 @@ const Topbar = ({ current }) => {
   };
   const clickUserManagerHandler = () => {
     console.log(cookie.access_token)
+
     if (cookie.isLogin==="true") {
       axios.delete(`${BASE_URL}/user/logout/`)
+
       .then((res)=>{
         console.log(res)
         removeCookie("access_token", {path:"/"})
