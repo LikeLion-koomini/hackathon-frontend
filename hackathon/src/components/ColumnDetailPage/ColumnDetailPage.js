@@ -5,6 +5,7 @@ import Topbar from '../Topbar/Topbar';
 import "../ColumnDetailPage/ReactQuillStyle.css"
 import { useLocation } from "react-router";
 import axios from 'axios';
+import { BASE_URL } from '../../utils/config';
 
 const ColumnDetailPage = ()=>{
   const [columnData, setColumnData] = useState({});
@@ -17,7 +18,7 @@ const ColumnDetailPage = ()=>{
   useEffect(()=>{
     const columnId = state?state:'903a17da-cb7a-4395-803b-8108c6ae52f4';
     console.log(columnId)
-    axios.get(`http://127.0.0.1:8000/column/${columnId}/`)
+    axios.get(`${BASE_URL}/column/${columnId}/`)
     .then((res)=>{
       const date = new Date(res.data.column.created_at)
       const formatDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`
@@ -29,7 +30,7 @@ const ColumnDetailPage = ()=>{
     })
   }, [])
   useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/column/isPurchase/',{
+    axios.get(`${BASE_URL}/column/isPurchase/`,{
       params:{column_id:state}
     },{
       headers:{ Authorization: `Bearer ${cookie.access_token}` },
@@ -43,7 +44,7 @@ const ColumnDetailPage = ()=>{
     })
   }, [state])
   const preferHandler = (e)=>{
-    axios.patch(`http://127.0.0.1:8000/column/${columnData.column_id}/likes/`,{},{
+    axios.patch(`${BASE_URL}/column/${columnData.column_id}/likes/`,{},{
       headers:{ Authorization: `Bearer ${cookie.access_token}` },
     }).then((res)=>{
       console.log(res)
@@ -52,7 +53,7 @@ const ColumnDetailPage = ()=>{
     })
   }
   const purchaseHandler = (e)=>{
-    axios.patch('http://127.0.0.1:8000/column/purchase/',{
+    axios.patch(`${BASE_URL}/column/purchase/`,{
       column_id:columnData.column_id
     },{
     headers:{ Authorization: `Bearer ${cookie.access_token}` },

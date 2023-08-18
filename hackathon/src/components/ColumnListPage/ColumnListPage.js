@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from 'react';
 import Topbar from '../Topbar/Topbar';
 import CategoryModal from '../CategoryModal/CategoryModal';
@@ -6,6 +7,7 @@ import Column from './Column.js';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { BASE_URL } from '../../utils/config';
 
 const categoryNameList = [
   "tag1",
@@ -35,7 +37,31 @@ const ColumnListPage = ()=>{
   }
   // 카테고리 목록 추가
   useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/column/')
+    console.log(category)
+    console.log(state)
+    console.log(typeof(state))
+    setCategoryJsxList((prev)=>{
+      return [
+        <button
+          className={styles.categoryManager}
+          key={0}
+          onClick={categoryModalHandler}
+        >
+          카테고리 추가 / 삭제
+        </button>,
+      ];
+    });
+    let key = 0;
+    for(let i=0; i<category.length; i++){
+      // eslint-disable-next-line no-loop-func
+      setCategoryJsxList((prev)=>{
+        return [...prev,<div className={styles.category} key={++key}>{categoryNameList[i]}</div>]
+      })
+    }
+  }, [category]);
+  // const listset = [1]
+  useEffect(()=>{
+    axios.get(`${BASE_URL}/column/`)
     .then((res)=>{
       setAllColumnData(()=>res.data)
     }).catch((err)=>{

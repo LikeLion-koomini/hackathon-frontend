@@ -3,14 +3,6 @@ import React, { useState, useEffect } from "react";
 import styles from "./CategoryModal.module.css";
 import images from "../../assets/images/images";
 
-const categoryNameList = [
-  "tag1",
-  "tag2",
-  "tag3",
-  "tag4",
-  "tag5"
-]
-
 // props로 모달창 관리 state(boolean)의 setter를 넘겨준다. :
 // 예시 : <CategoryModal setModalActive={모달창 관리 state의 setter}/>
 

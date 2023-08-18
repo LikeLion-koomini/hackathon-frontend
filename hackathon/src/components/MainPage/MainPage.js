@@ -23,12 +23,11 @@ const MainPage = () => {
 
   return (
     <div>
+      <div className="flex h-fit fixed bg-white w-full z-50">
       <Topbar current="main"/>
-      <div className={styles.main_container} style={{marginTop:50}}>
-        <div className={styles.main_input}>
-          <input type="search" />
-        </div>
-        <div className={styles.main_img}>
+      </div>
+      <div className={"flex w-full flex-col justify-center items-center"}>
+        <div className={"flex mt-28 w-full bg-slate-300 h-96"}>
           <img src="" alt="" />
         </div>
         <div className={styles.main_section1}>
@@ -57,73 +56,6 @@ const MainPage = () => {
             <div className={styles.main_section1_context}>
               <h1>다양한 카테고리 제공</h1>
               <p>다양한 카테고리를 통해서<br/>검색기능을 제공합니다.</p>
-            </div>
-          </div>
-        </div>
-        <div className={styles.main_title}>
-          <h1>다양한 카테고리의 금융 칼럼 제공</h1>
-          <p>저희 서비스에서 제공하는 다양한 기능들로 <br />필요한 정보를 빠르게 확인해보세요</p>
-        </div>
-        <div className={styles.main_section2}>
-          <div className={styles.main_section2_box}>
-            <div>
-              <img src={images.mainPageImg4} alt="" />
-            </div>
-            <h1>숏 칼럼</h1>
-            <p>짧지만 알찬 정보가 있는<br />간단한 칼럼</p>
-          </div>
-          <div className={styles.main_section2_box}>
-            <div>
-              <img src={images.mainPageImg5} alt="" />
-            </div>
-            <h1>단편 칼럼</h1>
-            <p>보다 자세한 정보가 있는<br />유익하고 알찬 칼럼</p>
-          </div>
-          <div className={styles.main_section2_box}>
-            <div>
-              <img src={images.mainPageImg6} alt="" />
-            </div>
-            <h1>장편 칼럼</h1>
-            <p>특정 주제에 대해서<br />장기적으로 연재되는 칼럼</p>
-          </div>
-        </div>
-        <div className={styles.main_footer}>
-          <div className={styles.main_footer_img}>
-            <img src="" alt="" />
-          </div>
-          <div className={styles.main_footer_context}>
-            <div className={styles.footer_context1}>
-              <h1>나만의 칼럼 작성하기</h1>
-              <p>내가 알고 있는 유용한 금융 지식! <br />칼럼으로 작성해서 수익을 만들어보세요</p>
-            </div>
-            <div className={styles.footer_context1}>
-              <h2>칼럼 작성하러 가기</h2>
-              <div className={styles.footer_context2}>
-                <div onClick={shortshortHandler} className={styles.context2}>
-                  <div>
-                    <img src={images.mainPageImg7} alt="" />
-                  </div>
-                  <div className={styles.context3}>
-                    <h3>숏 칼럼 작성하기</h3>
-                  </div>
-                </div>
-                <div onClick={shortHandler} className={styles.context2}>
-                  <div>
-                    <img src={images.mainPageImg8} alt="" />
-                  </div>
-                  <div className={styles.context3}>
-                    <h3>단편 칼럼 작성하기</h3>
-                  </div>
-                </div>
-                <div onClick={longHandler} className={styles.context2}>
-                  <div>
-                    <img src={images.mainPageImg9} alt="" />
-                  </div>
-                  <div className={styles.context3}>
-                    <h3>장편 칼럼 작성하기</h3>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

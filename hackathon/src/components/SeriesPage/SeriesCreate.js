@@ -3,6 +3,7 @@ import styles from './SeriesCreate.module.css';
 import { useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import axios from 'axios'
+import { BASE_URL } from '../../utils/config';
 
 const SeriesCreate = () => {
   const [cookie] = useCookies(["access_token"])
@@ -24,7 +25,7 @@ const SeriesCreate = () => {
     event.preventDefault();
     
     try {
-      const response = await axios.post("http://127.0.0.1:8000/series/create/", {
+      const response = await axios.post(`${BASE_URL}/series/create/`, {
         title: title,
         content: detail,
       },{
