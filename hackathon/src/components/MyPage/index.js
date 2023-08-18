@@ -118,7 +118,7 @@ const MyPage = () => {
   return (
     <div className="flex flex-col ">
       <div className="flex h-fit fixed w-full z-50">
-        <Topbar />
+        <Topbar current="myPage"/>
       </div>
       <div className="flex fixed" style={{ columnGap: 30 }}>
         <ProfileContainer

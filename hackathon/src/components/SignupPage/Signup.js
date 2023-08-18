@@ -3,6 +3,7 @@ import styles from './Signup.module.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import Topbar from '../Topbar/Topbar';
 const SignUp = () => {
   // 회원가입 정보
   const [idCheck,setIdCheck] = useState('');
@@ -78,9 +79,9 @@ const SignUp = () => {
       const access_token = res.data.token.access_token
       const refresh_token = res.data.token.refresh_token
       const user_uuid = res.data.user.uuid
-      setCookie("access_token", access_token, "/")
-      setCookie("refresh_token", refresh_token, "/")
-      setCookie("user_uuid", user_uuid, "/")
+      setCookie("access_token", access_token, {path:"/"})
+      setCookie("refresh_token", refresh_token, {path:"/"})
+      setCookie("user_uuid", user_uuid, {path:"/"})
       navigate('/');
     }).catch((err)=>{
       console.log(err)
@@ -89,75 +90,78 @@ const SignUp = () => {
   };
 
   return (
-    <div className={styles.signup_container}>
-      <h1 style={{fontSize:'2.4rem'}}>Economys<span>Times</span></h1>
-      <h1>회원가입</h1>
-      <form onSubmit={signUpHandler}>
-        <div className={styles.signup_box}>
-          <div className={styles.signup_form}>
-            <div className={styles.form_label}>
-              <label htmlFor="id">아이디</label>
+    <div>
+      <Topbar/>
+      <div className={styles.signup_container}>
+        <h1 style={{fontSize:'2.4rem'}}>Economys<span>Times</span></h1>
+        <h1>회원가입</h1>
+        <form onSubmit={signUpHandler}>
+          <div className={styles.signup_box}>
+            <div className={styles.signup_form}>
+              <div className={styles.form_label}>
+                <label htmlFor="id">아이디</label>
+              </div>
+              <div className={styles.form_input1}>
+                <input onChange={idChecking} type="text" id="id"/>
+              </div>
+              <button>중복확인</button>
             </div>
-            <div className={styles.form_input1}>
-              <input onChange={idChecking} type="text" id="id"/>
+            <div className={styles.signup_form}>
+              <div className={styles.form_label}>
+                <label htmlFor="pw">비밀번호</label>
+              </div>
+              <div className={styles.form_input}>
+                <input onChange={pwChecking} type="password" id="pw"/>
+              </div>
             </div>
-            <button>중복확인</button>
+            <div className={styles.signup_form}>
+              <div className={styles.form_label}>
+                <label htmlFor="pwcheck">비밀번호 확인</label>
+              </div>
+              <div className={styles.form_input}>
+                <input onChange={pw2Checking} type="password" id="pwcheck"/>
+              </div>
+            </div>
+            <div className={styles.signup_form}>
+              <div className={styles.form_label}>
+                <label htmlFor="name">이름</label>
+              </div>
+              <div className={styles.form_input}>
+                <input onChange={nameChecking} type="text" id="name"/>
+              </div>
+            </div>
+            <div className={styles.signup_form}>
+              <div className={styles.form_label}>
+                <label htmlFor="birth">생년월일</label>
+              </div>
+              <div className={styles.form_input}>
+                <input onChange={birthChecking} type="date" id="birth"/>
+              </div>
+            </div>
+            <div className={styles.signup_form}>
+              <div className={styles.form_label}>
+                <label htmlFor="email">이메일</label>
+              </div>
+              <div className={styles.form_input}>
+                <input onChange={emailChecking} type="email" id="email"/>
+              </div>
+            </div>
+            <div className={styles.signup_form}>
+              <div className={styles.form_label}>
+                <label htmlFor="tel">전화번호</label>
+              </div>
+              <div className={styles.form_input}>
+                <input onChange={telChecking} type="tel" id="tel"/>
+              </div>
+            </div>
           </div>
-          <div className={styles.signup_form}>
-            <div className={styles.form_label}>
-              <label htmlFor="pw">비밀번호</label>
-            </div>
-            <div className={styles.form_input}>
-              <input onChange={pwChecking} type="password" id="pw"/>
-            </div>
+          {pwAlert && <div className={styles.signup_alert}>비밀번호를 다시 확인해주세요</div>}
+          {formAlert && <div className={styles.signup_alert}>모든 정보를 기입해주세요</div>}
+          <div className={styles.signup_button}>
+            <button>회원가입</button>
           </div>
-          <div className={styles.signup_form}>
-            <div className={styles.form_label}>
-              <label htmlFor="pwcheck">비밀번호 확인</label>
-            </div>
-            <div className={styles.form_input}>
-              <input onChange={pw2Checking} type="password" id="pwcheck"/>
-            </div>
-          </div>
-          <div className={styles.signup_form}>
-            <div className={styles.form_label}>
-              <label htmlFor="name">이름</label>
-            </div>
-            <div className={styles.form_input}>
-              <input onChange={nameChecking} type="text" id="name"/>
-            </div>
-          </div>
-          <div className={styles.signup_form}>
-            <div className={styles.form_label}>
-              <label htmlFor="birth">생년월일</label>
-            </div>
-            <div className={styles.form_input}>
-              <input onChange={birthChecking} type="date" id="birth"/>
-            </div>
-          </div>
-          <div className={styles.signup_form}>
-            <div className={styles.form_label}>
-              <label htmlFor="email">이메일</label>
-            </div>
-            <div className={styles.form_input}>
-              <input onChange={emailChecking} type="email" id="email"/>
-            </div>
-          </div>
-          <div className={styles.signup_form}>
-            <div className={styles.form_label}>
-              <label htmlFor="tel">전화번호</label>
-            </div>
-            <div className={styles.form_input}>
-              <input onChange={telChecking} type="tel" id="tel"/>
-            </div>
-          </div>
-        </div>
-        {pwAlert && <div className={styles.signup_alert}>비밀번호를 다시 확인해주세요</div>}
-        {formAlert && <div className={styles.signup_alert}>모든 정보를 기입해주세요</div>}
-        <div className={styles.signup_button}>
-          <button>회원가입</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   )
 };

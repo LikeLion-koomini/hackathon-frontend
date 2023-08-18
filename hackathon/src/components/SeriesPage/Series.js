@@ -1,9 +1,18 @@
 import React from "react";
 import styles from './Series.module.css'
+import { useNavigate } from 'react-router-dom';
 
 const Series = (props) => {
+  const navigate = useNavigate()
+
+  const seriesClickHandler = (e)=>{
+    const series_id = props.series.series_id;
+    console.log(series_id)
+    navigate('/seriesList/column/', {state:series_id})
+  }
+
   return(
-    <div key={props.series.series_id} className={styles.series}>
+    <div key={props.series.series_id} className={styles.series} onClick={seriesClickHandler}>
       <div className={styles.series_color}></div>
       <div className={styles.series_context_box}>
         <div className={styles.series_context}>
