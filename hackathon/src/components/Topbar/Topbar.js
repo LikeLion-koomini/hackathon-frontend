@@ -71,7 +71,7 @@ const Topbar = ({ current }) => {
     const urlName = urlList[toolId]
     const state = toolId==="normal"?"normal":"short";
     navigate(urlName, {state:state})
-  }
+  } 
   useEffect(()=>{
     if(cookie.access_token){
       setIsLogin(()=>true)
