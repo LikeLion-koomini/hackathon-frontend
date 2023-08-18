@@ -27,9 +27,6 @@ const MainPage = () => {
       <Topbar current="main"/>
       </div>
       <div className={styles.main_container}>
-        <div className={styles.main_input} style={{marginTop:50}}>
-          <input type="search" />
-        </div>
         <div className={styles.main_img}>
           <img src="" alt="" />
         </div>
